@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class ReservationCustomerController extends Controller
 {
@@ -12,7 +15,9 @@ class ReservationCustomerController extends Controller
      */
     public function index()
     {
-        //
+        $reservations = Reservation::where('user_id', Auth::user()->id)->get();
+
+        return Inertia::render('Customer/Reservation/IndexReservation', compact('reservation'));
     }
 
     /**
@@ -28,7 +33,13 @@ class ReservationCustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Reservation::create([
+            'user_id' => Auth::user()->id,
+            'service_id' => $request->service_id,
+            'datetime' => $request->datetime
+        ]);
+
+        return back();
     }
 
     /**
@@ -36,7 +47,9 @@ class ReservationCustomerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $reservation = Reservation::where('id', $id)->first();
+
+        return Inertia::render('Customer/Reservation/ShowReservation', compact('reservation'));
     }
 
     /**
@@ -52,7 +65,12 @@ class ReservationCustomerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $reservation = Reservation::find($id);
+        $reservationUpdate = $request->only(['service_id', 'datetime']);
+
+        $reservation->update($reservationUpdate);
+
+        return back();
     }
 
     /**
@@ -60,6 +78,10 @@ class ReservationCustomerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $reservation = Reservation::find($id);
+
+        $reservation->delete();
+
+        return back();
     }
 }

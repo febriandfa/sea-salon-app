@@ -13,22 +13,39 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = User::create([
-            'name' => 'Thomas N',
-            'email' => 'thomas.n@compfest.id',
-            'phone_number' => '08123456789',
-            'role' => 'admin',
-            'password' => 'Admin123'
-        ]);
-        $admin->assignRole('admin');
+        $users = [
+            [
+                'name' => 'Thomas N',
+                'email' => 'thomas.n@compfest.id',
+                'phone_number' => '08123456789',
+                'role' => 'admin',
+                'password' => 'Admin123',
+            ],
+            [
+                'name' => 'Febrian D',
+                'email' => 'febrian.d@compfest.id',
+                'phone_number' => '088888888888',
+                'role' => 'customer',
+                'password' => 'Customer123',
+            ],
+            [
+                'name' => 'Eka P',
+                'email' => 'eka.p@compfest.id',
+                'phone_number' => '081111111111',
+                'role' => 'employee',
+                'password' => 'Employee123',
+            ],
+        ];
 
-        $cust = User::create([
-            'name' => 'Febrian D',
-            'email' => 'febrian.d@compfest.id',
-            'phone_number' => '08123456789',
-            'role' => 'customer',
-            'password' => 'Customer123'
-        ]);
-        $cust->assignRole('customer');
+        foreach ($users as $user) {
+            $user = User::create([
+                'name' => $user['name'],
+                'email' => $user['email'],
+                'phone_number' => $user['phone_number'],
+                'role' => $user['role'],
+                'password' => $user['password'],
+            ]);
+            $user->assignRole($user['role']);
+        }
     }
 }

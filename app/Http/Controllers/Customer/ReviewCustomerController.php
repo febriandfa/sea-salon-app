@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class ReviewCustomerController extends Controller
 {
@@ -12,7 +15,9 @@ class ReviewCustomerController extends Controller
      */
     public function index()
     {
-        //
+        $reviews = Review::all();
+
+        return Inertia::render('Customer/Home', compact('reviews'));
     }
 
     /**
@@ -28,7 +33,13 @@ class ReviewCustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Review::create([
+            'user_id' => Auth::user()->id,
+            'rating' => $request->rating,
+            'comment' => $request->comment
+        ]);
+
+        return back();
     }
 
     /**
@@ -52,7 +63,13 @@ class ReviewCustomerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $review = Review::find($id);
+
+        $reviewUpdate = $request->only(['rating', 'comment']);
+
+        $review->update($reviewUpdate);
+
+        return back();
     }
 
     /**
@@ -60,6 +77,10 @@ class ReviewCustomerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $review = Review::find($id);
+
+        $review->delete();
+
+        return back();
     }
 }
