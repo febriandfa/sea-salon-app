@@ -15,15 +15,21 @@ class ServiceSeeder extends Seeder
     {
         $services = [
             [
-                'name' => 'Massage',
+                'name' => 'Haircuts and Styling',
                 'duration' => '60',
                 'price' => '100000',
                 'description' => fake()->paragraph
             ],
             [
-                'name' => 'Haircut',
+                'name' => 'Manicure and Pedicure',
                 'duration' => '60',
                 'price' => '70000',
+                'description' => fake()->paragraph
+            ],
+            [
+                'name' => 'Facial Treatments',
+                'duration' => '60',
+                'price' => '85000',
                 'description' => fake()->paragraph
             ]
         ];

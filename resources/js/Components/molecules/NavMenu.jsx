@@ -11,7 +11,7 @@ export default function NavMenu() {
             active: url === "/",
         },
         {
-            link: route("service"),
+            link: route("service.index"),
             menu: "Our Service",
             active: url.startsWith("/service"),
         },
@@ -21,7 +21,7 @@ export default function NavMenu() {
             active: url.startsWith("/product"),
         },
         {
-            link: route("review"),
+            link: route("review.index"),
             menu: "Review",
             active: url.startsWith("/review"),
         },

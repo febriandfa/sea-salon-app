@@ -106,7 +106,7 @@ export default function Register() {
                             />
                         </div>
                         <p>
-                            Already have an accout?{" "}
+                            Already a member?{" "}
                             <Link
                                 href={route("login")}
                                 className="text-gold-700 underline"

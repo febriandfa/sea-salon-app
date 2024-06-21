@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Customer\ReservationCustomerController;
 use App\Http\Controllers\Customer\ReviewCustomerController;
+use App\Http\Controllers\Customer\ServiceCustomerController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Contact;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\Service;
@@ -31,24 +33,21 @@ use Inertia\Inertia;
 // });
 
 Route::get('/', function () {
-    return Inertia::render('Customer/Home');
-})->name('home');
-Route::get('/service', function () {
-    $services = Service::all();
+    $contacts = Contact::with(['users'])->get();
 
-    return Inertia::render('Customer/Service', compact('services'));
-})->name('service');
+    return Inertia::render('Customer/Home', compact('contacts'));
+})->name('home');
 Route::get('/product', function () {
+    $contacts = Contact::with(['users'])->get();
     $products = Product::all();
 
-    return Inertia::render('Customer/Product', compact('products'));
+    return Inertia::render('Customer/Product', compact('contacts', 'products'));
 })->name('product');
-Route::get('/review', function () {
-    $reviews = Review::with(['users'])->paginate(6);
 
-    return Inertia::render('Customer/Review', compact('reviews'));
-})->name('review');
-
+Route::resources([
+    'service' => ServiceCustomerController::class,
+    'review' => ReviewCustomerController::class
+]);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Customer/Review');
@@ -62,11 +61,11 @@ Route::group(['middleware' => 'role:admin'], function () {
     });
 });
 
-Route::group(['middleware' => 'role:customer'], function () {
+Route::group(['middleware' => ['auth', 'role:customer']], function () {
     Route::prefix('customer')->group(function () {
         Route::resources([
             'reservation' => ReservationCustomerController::class,
-            'review' => ReviewCustomerController::class
+            // 'review' => ReviewCustomerController::class
         ]);
     });
 });

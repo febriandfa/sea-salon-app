@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Review extends Model
+class Branch extends Model
 {
     use HasFactory;
 
-    protected $table = 'reviews';
+    protected $table = 'branches';
 
     protected $fillable = [
         'name',
-        'rating',
-        'comment',
+        'location',
+        'open_time',
+        'close_time'
     ];
 }

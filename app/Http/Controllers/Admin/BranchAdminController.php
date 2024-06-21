@@ -1,25 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Customer;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Contact;
-use App\Models\Review;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
 
-class ReviewCustomerController extends Controller
+class BranchAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $contacts = Contact::with(['users'])->get();
-        $reviews = Review::paginate(6);
-
-        return Inertia::render('Customer/Review', compact('contacts', 'reviews'));
+        //
     }
 
     /**
@@ -35,13 +28,7 @@ class ReviewCustomerController extends Controller
      */
     public function store(Request $request)
     {
-        Review::create([
-            'name' => $request->name,
-            'rating' => $request->rating,
-            'comment' => $request->comment
-        ]);
-
-        return back();
+        //
     }
 
     /**

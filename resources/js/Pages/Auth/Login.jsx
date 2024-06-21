@@ -76,7 +76,7 @@ export default function Login() {
                             />
                         </div>
                         <p>
-                            Dont have an accout?{" "}
+                            Not a member?{" "}
                             <Link
                                 href={route("register")}
                                 className="text-gold-700 underline"

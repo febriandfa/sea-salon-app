@@ -22,18 +22,18 @@ class UserSeeder extends Seeder
                 'password' => 'Admin123',
             ],
             [
+                'name' => 'Sekar P',
+                'email' => 'sekar.p@compfest.id',
+                'phone_number' => '081111111111',
+                'role' => 'admin',
+                'password' => 'admin123',
+            ],
+            [
                 'name' => 'Febrian D',
                 'email' => 'febrian.d@compfest.id',
                 'phone_number' => '088888888888',
                 'role' => 'customer',
                 'password' => 'Customer123',
-            ],
-            [
-                'name' => 'Eka P',
-                'email' => 'eka.p@compfest.id',
-                'phone_number' => '081111111111',
-                'role' => 'employee',
-                'password' => 'Employee123',
             ],
         ];
 

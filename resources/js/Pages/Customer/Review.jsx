@@ -4,29 +4,28 @@ import PrimaryButton from "@/Components/atoms/PrimaryButton";
 import Separator from "@/Components/atoms/Separator";
 import StarRating from "@/Components/atoms/StarRating";
 import StarRatingInput from "@/Components/atoms/StarRatingInput";
+import Title from "@/Components/atoms/Title";
+import ReviewCard from "@/Components/molecules/ReviewCard";
 import LandingLayout from "@/Layouts/LandingLayout";
 import { formatDate } from "@/Utils/formatDate";
 import { Link, useForm, usePage } from "@inertiajs/react";
 import { useState } from "react";
 
 export default function Review({ auth }) {
-    const { reviews } = usePage().props;
-
-    const [rating, setRating] = useState(0);
+    const { reviews, contacts } = usePage().props;
 
     const { data, setData, post, errors } = useForm({
+        name: "",
         rating: "",
         comment: "",
     });
-
-    console.log(data);
 
     const onSubmit = (e) => {
         e.preventDefault();
         post(route("review.store"), {
             data,
             onSuccess: () => {
-                setData({ rating: 0, comment: "" });
+                setData({ name: "", rating: "", comment: "" });
             },
         });
     };
@@ -34,13 +33,9 @@ export default function Review({ auth }) {
     console.log(reviews);
 
     return (
-        <LandingLayout userLogin={auth.user}>
+        <LandingLayout userLogin={auth.user} contactDatas={contacts}>
             <article className="min-h-screen">
-                <h1 className="font-playfair italic text-5xl">
-                    Review From~
-                    <br />
-                    Our Customer
-                </h1>
+                <Title title="Review From Our Customers~" color="black" />
                 <div className="flex items-center justify-between gap-8 mt-12">
                     <Link
                         as="button"
@@ -64,26 +59,13 @@ export default function Review({ auth }) {
                     </Link>
                     <div className="grid grid-cols-3 gap-6 mx-auto">
                         {reviews.data.map((review) => (
-                            <div
+                            <ReviewCard
                                 key={review.id}
-                                className="bg-white p-3 shadow-lg border border-gold-700 rounded-lg space-y-4"
-                            >
-                                <div className="flex items-center justify-between">
-                                    <p className="font-playfair italic text-xl w-36 line-clamp-1">
-                                        {review.users.name}
-                                    </p>
-                                    <p className="text-sm text-gray-500">
-                                        {formatDate(review.created_at)}
-                                    </p>
-                                </div>
-                                <Separator />
-                                <div className="flex flex-col justify-between h-48">
-                                    <p className="line-clamp-6">
-                                        {review.comment}
-                                    </p>
-                                    <StarRating rating={review.rating} />
-                                </div>
-                            </div>
+                                name={review.name}
+                                comment={review.comment}
+                                rating={review.rating}
+                                date={review.created_at}
+                            />
                         ))}
                     </div>
                     <Link
@@ -114,18 +96,22 @@ export default function Review({ auth }) {
                 </h1>
                 <div className="mt-12 w-3/5">
                     <form onSubmit={onSubmit} className="space-y-4">
-                        <div className="w-fit mx-auto">
-                            <p className="font-playfair italic text-xl">
-                                How Would You Rate Us?
+                        <div className="w-full">
+                            <p className="font-playfair italic text-xl text-center">
+                                Tell Us Your Name
                             </p>
-                            <StarRatingInput
-                                rating={data.rating}
-                                setRating={(value) => setData("rating", value)}
+                            <InputText
+                                name="name"
+                                placeholder="Name"
+                                value={data.name}
+                                onChange={(e) =>
+                                    setData("name", e.target.value)
+                                }
                             />
                         </div>
                         <div className="w-full">
                             <p className="font-playfair italic text-xl text-center">
-                                Leave Us a Coment
+                                Leave Us a Comment
                             </p>
                             <InputTextArea
                                 name="comment"
@@ -134,6 +120,15 @@ export default function Review({ auth }) {
                                 onChange={(e) =>
                                     setData("comment", e.target.value)
                                 }
+                            />
+                        </div>
+                        <div className="w-fit mx-auto">
+                            <p className="font-playfair italic text-xl">
+                                How Would You Rate Us?
+                            </p>
+                            <StarRatingInput
+                                rating={data.rating}
+                                setRating={(value) => setData("rating", value)}
                             />
                         </div>
                         <div className="w-fit mx-auto">

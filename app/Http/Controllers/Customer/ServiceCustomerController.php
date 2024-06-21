@@ -4,12 +4,11 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
-use App\Models\Review;
+use App\Models\Service;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-class ReviewCustomerController extends Controller
+class ServiceCustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,9 @@ class ReviewCustomerController extends Controller
     public function index()
     {
         $contacts = Contact::with(['users'])->get();
-        $reviews = Review::paginate(6);
+        $services = Service::all();
 
-        return Inertia::render('Customer/Review', compact('contacts', 'reviews'));
+        return Inertia::render('Customer/Service', compact('contacts', 'services'));
     }
 
     /**
@@ -35,13 +34,7 @@ class ReviewCustomerController extends Controller
      */
     public function store(Request $request)
     {
-        Review::create([
-            'name' => $request->name,
-            'rating' => $request->rating,
-            'comment' => $request->comment
-        ]);
-
-        return back();
+        //
     }
 
     /**
@@ -49,7 +42,10 @@ class ReviewCustomerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $contacts = Contact::with(['users'])->get();
+        $service = Service::where('id', $id)->first();
+
+        return Inertia::render('Customer/Reservation', compact('contacts', 'service'));
     }
 
     /**
