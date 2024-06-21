@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Review;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call([UserSeeder::class]);
         $this->call([ServiceSeeder::class]);
         $this->call([ProductSeeder::class]);
+
+        Review::factory(10)->create();
 
         // \App\Models\User::factory(10)->create();
 

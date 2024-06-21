@@ -15,9 +15,7 @@ class ReviewCustomerController extends Controller
      */
     public function index()
     {
-        $reviews = Review::all();
-
-        return Inertia::render('Customer/Home', compact('reviews'));
+        //
     }
 
     /**
