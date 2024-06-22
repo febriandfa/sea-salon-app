@@ -7,7 +7,7 @@ import Subtitle from "@/Components/atoms/Subtitle";
 import Title from "@/Components/atoms/Title";
 import BranchCard from "@/Components/molecules/BranchCard";
 import LandingLayout from "@/Layouts/LandingLayout";
-import { useForm, usePage } from "@inertiajs/react";
+import { router, useForm, usePage } from "@inertiajs/react";
 
 export default function Reservation({ auth }) {
     const { contacts, service, branchServices } = usePage().props;
@@ -38,6 +38,15 @@ export default function Reservation({ auth }) {
         window.location.href = pdfPath;
     };
 
+    const handleOnClick = (branchId) => {
+        if (service.member_only === "Y" && !auth.user) {
+            router.get(route("register"));
+        } else {
+            setOpenBranchId(openBranchId === branchId ? null : branchId);
+            setData("branch_id", branchId);
+        }
+    };
+
     return (
         <LandingLayout userLogin={auth.user} contactDatas={contacts}>
             <article className="h-80 overflow-hidden px-12">
@@ -60,15 +69,12 @@ export default function Reservation({ auth }) {
                             location={branchService.branches.location}
                             openTime={branchService.branches.open_time}
                             closeTime={branchService.branches.close_time}
+                            member={branchService.services.member_only}
+                            userLogin={auth.user}
                             isOpen={openBranchId === branchService.branches.id}
-                            handleOnClick={() => {
-                                setOpenBranchId(
-                                    openBranchId === branchService.branches.id
-                                        ? null
-                                        : branchService.branches.id
-                                );
-                                setData("branch_id", branchService.branch_id);
-                            }}
+                            handleOnClick={() =>
+                                handleOnClick(branchService.branch_id)
+                            }
                         >
                             <form onSubmit={onSubmit} className="space-y-4">
                                 <div className="w-full">

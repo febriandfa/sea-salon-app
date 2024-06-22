@@ -9,6 +9,8 @@ export default function BranchCard({
     closeTime,
     isOpen,
     handleOnClick,
+    member,
+    userLogin,
     children,
 }) {
     return (
@@ -38,7 +40,16 @@ export default function BranchCard({
                         </p>
                     </div>
                 </div>
-                <PrimaryButton text="Reservation" onClick={handleOnClick} />
+                <PrimaryButton
+                    text={
+                        member === "Y"
+                            ? userLogin
+                                ? "Reservation"
+                                : "Member Only"
+                            : "Reservation"
+                    }
+                    onClick={handleOnClick}
+                />
             </div>
             {isOpen && <div className="mt-4 w-96 mx-auto">{children}</div>}
         </div>
