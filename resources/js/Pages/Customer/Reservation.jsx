@@ -8,6 +8,7 @@ import Title from "@/Components/atoms/Title";
 import BranchCard from "@/Components/molecules/BranchCard";
 import LandingLayout from "@/Layouts/LandingLayout";
 import { router, useForm, usePage } from "@inertiajs/react";
+import PrimaryLink from "@/Components/atoms/PrimaryLink";
 
 export default function Reservation({ auth }) {
     const { contacts, service, branchServices } = usePage().props;
@@ -23,20 +24,25 @@ export default function Reservation({ auth }) {
         time: "",
     });
 
-    console.log(data.branch_id);
-
     const onSubmit = (e) => {
         e.preventDefault();
-        const response = post(route("reservation.store"), {
+        post(route("reservation.store"), {
             data,
             onSuccess: () => {
+                window.location.href = route("reservation.download", [
+                    data.name,
+                    data.phone_number,
+                    data.service_id,
+                    data.branch_id,
+                    data.date,
+                    data.time,
+                ]);
                 setData({ name: "", phone_number: "", date: "", time: "" });
             },
         });
-        const { pdfPath } = response.data;
-
-        window.location.href = pdfPath;
     };
+
+    console.log(useForm());
 
     const handleOnClick = (branchId) => {
         if (service.member_only === "Y" && !auth.user) {

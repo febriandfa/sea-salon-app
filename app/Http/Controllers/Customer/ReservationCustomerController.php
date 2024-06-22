@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Branch;
 use App\Models\Reservation;
+use App\Models\Service;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -33,7 +36,7 @@ class ReservationCustomerController extends Controller
      */
     public function store(Request $request)
     {
-        Reservation::create([
+        $reservation = Reservation::create([
             'name' => $request->name,
             'phone_number' => $request->phone_number,
             'service_id' => $request->service_id,
@@ -43,6 +46,7 @@ class ReservationCustomerController extends Controller
         ]);
 
         return back();
+        // return response()->json(['id' => $reservation->id]);
     }
 
     /**
@@ -86,5 +90,15 @@ class ReservationCustomerController extends Controller
         $reservation->delete();
 
         return back();
+    }
+
+    public function download($custName, $custPhone, $serviceId, $branchId, $date, $time)
+    {
+        $serviceName = Service::where('id', $serviceId)->first()->name;
+        $branchName = Branch::where('id', $branchId)->first()->name;
+
+        $pdf = Pdf::loadView('reservation_pdf', compact('custName', 'custPhone', 'serviceName', 'branchName', 'date', 'time'));
+
+        return $pdf->download('reservation.pdf');
     }
 }

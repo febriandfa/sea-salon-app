@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardAdminController;
+use App\Http\Controllers\Customer\DashboardCustomerController;
 use App\Http\Controllers\Customer\ReservationCustomerController;
 use App\Http\Controllers\Customer\ReviewCustomerController;
 use App\Http\Controllers\Customer\ServiceCustomerController;
@@ -49,15 +51,12 @@ Route::resources([
     'review' => ReviewCustomerController::class,
     'reservation' => ReservationCustomerController::class
 ]);
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Customer/Review');
-})->name('dashboard');
+Route::get('/reservation/{custName}/{custPhone}/{serviceId}/{branchId}/{date}/{time}/download-ticket', [ReservationCustomerController::class, 'download'])->name('reservation.download');
 
 Route::group(['middleware' => 'role:admin'], function () {
     Route::prefix('admin')->group(function () {
         Route::resources([
-
+            'dashboard-admin' => DashboardAdminController::class,
         ]);
     });
 });
@@ -65,7 +64,7 @@ Route::group(['middleware' => 'role:admin'], function () {
 Route::group(['middleware' => ['auth', 'role:customer']], function () {
     Route::prefix('customer')->group(function () {
         Route::resources([
-            'reservation-member' => ReservationCustomerController::class,
+            'dashboard' => DashboardCustomerController::class
         ]);
     });
 });
