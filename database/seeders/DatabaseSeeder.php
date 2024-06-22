@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\BranchService;
 use App\Models\Review;
 use Illuminate\Database\Seeder;
 
@@ -19,8 +20,11 @@ class DatabaseSeeder extends Seeder
         $this->call([ServiceSeeder::class]);
         $this->call([ProductSeeder::class]);
         $this->call([ContactSeeder::class]);
+        $this->call([BranchSeeder::class]);
+        $this->call([BranchServiceSeeder::class]);
 
         Review::factory(10)->create();
+        // BranchService::factory(5)->create();
 
         // \App\Models\User::factory(10)->create();
 

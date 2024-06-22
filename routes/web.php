@@ -46,7 +46,8 @@ Route::get('/product', function () {
 
 Route::resources([
     'service' => ServiceCustomerController::class,
-    'review' => ReviewCustomerController::class
+    'review' => ReviewCustomerController::class,
+    'reservation' => ReservationCustomerController::class
 ]);
 
 Route::get('/dashboard', function () {
@@ -64,8 +65,7 @@ Route::group(['middleware' => 'role:admin'], function () {
 Route::group(['middleware' => ['auth', 'role:customer']], function () {
     Route::prefix('customer')->group(function () {
         Route::resources([
-            'reservation' => ReservationCustomerController::class,
-            // 'review' => ReviewCustomerController::class
+            'reservation-member' => ReservationCustomerController::class,
         ]);
     });
 });

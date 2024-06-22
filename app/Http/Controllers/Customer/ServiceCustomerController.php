@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\BranchService;
 use App\Models\Contact;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -44,8 +45,9 @@ class ServiceCustomerController extends Controller
     {
         $contacts = Contact::with(['users'])->get();
         $service = Service::where('id', $id)->first();
+        $branchServices = BranchService::where('service_id', $id)->with(['branches', 'services'])->get();
 
-        return Inertia::render('Customer/Reservation', compact('contacts', 'service'));
+        return Inertia::render('Customer/Reservation', compact('contacts', 'service', 'branchServices'));
     }
 
     /**

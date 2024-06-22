@@ -4,6 +4,7 @@ import PrimaryButton from "@/Components/atoms/PrimaryButton";
 import Separator from "@/Components/atoms/Separator";
 import StarRating from "@/Components/atoms/StarRating";
 import StarRatingInput from "@/Components/atoms/StarRatingInput";
+import Subtitle from "@/Components/atoms/Subtitle";
 import Title from "@/Components/atoms/Title";
 import ReviewCard from "@/Components/molecules/ReviewCard";
 import LandingLayout from "@/Layouts/LandingLayout";
@@ -89,11 +90,11 @@ export default function Review({ auth }) {
                 </div>
             </article>
             <article className="min-h-screen flex flex-col items-center justify-center">
-                <h1 className="font-playfair italic text-5xl text-center">
-                    Leave A Review
+                <Subtitle>
+                    Leave a Review
                     <br />
                     For Us~
-                </h1>
+                </Subtitle>
                 <div className="mt-12 w-3/5">
                     <form onSubmit={onSubmit} className="space-y-4">
                         <div className="w-full">

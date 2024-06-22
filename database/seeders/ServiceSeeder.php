@@ -18,19 +18,22 @@ class ServiceSeeder extends Seeder
                 'name' => 'Haircuts and Styling',
                 'duration' => '60',
                 'price' => '100000',
-                'description' => fake()->paragraph
+                'description' => fake()->paragraph,
+                'member_only' => 'N'
             ],
             [
                 'name' => 'Manicure and Pedicure',
                 'duration' => '60',
                 'price' => '70000',
-                'description' => fake()->paragraph
+                'description' => fake()->paragraph,
+                'member_only' => 'Y'
             ],
             [
                 'name' => 'Facial Treatments',
                 'duration' => '60',
                 'price' => '85000',
-                'description' => fake()->paragraph
+                'description' => fake()->paragraph,
+                'member_only' => 'N'
             ]
         ];
 
@@ -40,6 +43,7 @@ class ServiceSeeder extends Seeder
                 'duration' => $service['duration'],
                 'price' => $service['price'],
                 'description' => $service['description'],
+                'member_only' => $service['member_only']
             ]);
         }
     }

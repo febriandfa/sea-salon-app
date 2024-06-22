@@ -1,5 +1,6 @@
 import NavAuthLink from "@/Components/atoms/NavAuthLink";
 import Separator from "@/Components/atoms/Separator";
+import Subtitle from "@/Components/atoms/Subtitle";
 import Title from "@/Components/atoms/Title";
 import ServiceCard from "@/Components/molecules/ServiceCard";
 import LandingLayout from "@/Layouts/LandingLayout";
@@ -7,6 +8,7 @@ import { Link, usePage } from "@inertiajs/react";
 
 export default function Service({ auth }) {
     const { services, contacts } = usePage().props;
+    console.log(services);
 
     return (
         <LandingLayout userLogin={auth.user} contactDatas={contacts}>
@@ -34,6 +36,7 @@ export default function Service({ auth }) {
                                 duration={service.duration}
                                 price={service.price}
                                 description={service.description}
+                                member={service.member_only}
                             />
                         );
                     })}
@@ -42,11 +45,11 @@ export default function Service({ auth }) {
             <article className="min-h-screen mt-12 flex flex-col items-center justify-center space-y-6">
                 <div className="border border-gold-700 p-6 w-3/5">
                     <div className="border border-gold-700 p-6">
-                        <h1 className="font-playfair italic text-5xl text-center">
-                            Become A Member
+                        <Subtitle>
+                            Become a Member
                             <br />
                             For Our Special Services~
-                        </h1>
+                        </Subtitle>
                         <div className="w-fit mx-auto my-16">
                             <Link
                                 as="button"
@@ -56,9 +59,7 @@ export default function Service({ auth }) {
                                 Join Now!
                             </Link>
                         </div>
-                        <h1 className="font-playfair italic text-5xl text-center">
-                            Don't Miss This Chance~
-                        </h1>
+                        <Subtitle>Don't Miss This Chance~</Subtitle>
                     </div>
                 </div>
             </article>

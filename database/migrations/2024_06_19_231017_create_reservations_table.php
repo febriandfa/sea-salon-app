@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone_number');
             $table->foreignId('service_id')->constrained();
-            $table->dateTime('datetime');
+            $table->foreignId('branch_id')->constrained();
+            $table->date('date');
+            $table->time('time');
             $table->timestamps();
         });
     }

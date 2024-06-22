@@ -15,6 +15,7 @@ class Service extends Model
         'name',
         'duration',
         'price',
-        'description'
+        'description',
+        'member_only'
     ];
 }

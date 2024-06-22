@@ -34,9 +34,12 @@ class ReservationCustomerController extends Controller
     public function store(Request $request)
     {
         Reservation::create([
-            'user_id' => Auth::user()->id,
+            'name' => $request->name,
+            'phone_number' => $request->phone_number,
             'service_id' => $request->service_id,
-            'datetime' => $request->datetime
+            'branch_id' => $request->branch_id,
+            'date' => $request->date,
+            'time' => $request->time
         ]);
 
         return back();

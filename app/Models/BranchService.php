@@ -5,26 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Reservation extends Model
+class BranchService extends Model
 {
     use HasFactory;
 
-    protected $table = 'reservations';
+    protected $table = 'branch_services';
 
     protected $fillable = [
-        'name',
-        'phone_number',
-        'service_id',
         'branch_id',
-        'date',
-        'time'
+        'service_id'
     ];
-
-    public function services() {
-        return $this->belongsTo(Service::class, 'service_id', 'id');
-    }
 
     public function branches() {
         return $this->belongsTo(Branch::class, 'branch_id', 'id');
+    }
+
+    public function services() {
+        return $this->belongsTo(Service::class, 'service_id', 'id');
     }
 }
