@@ -1,5 +1,6 @@
 import InputText from "@/Components/atoms/InputText";
 import InputTextArea from "@/Components/atoms/InputTextArea";
+import LabelInput from "@/Components/atoms/LabelInput";
 import PrimaryButton from "@/Components/atoms/PrimaryButton";
 import Separator from "@/Components/atoms/Separator";
 import StarRating from "@/Components/atoms/StarRating";
@@ -98,9 +99,7 @@ export default function Review({ auth }) {
                 <div className="mt-12 w-3/5">
                     <form onSubmit={onSubmit} className="space-y-4">
                         <div className="w-full">
-                            <p className="font-playfair italic text-xl text-center">
-                                Tell Us Your Name
-                            </p>
+                            <LabelInput text="Tell Us Your Name" />
                             <InputText
                                 name="name"
                                 placeholder="Name"
@@ -111,9 +110,7 @@ export default function Review({ auth }) {
                             />
                         </div>
                         <div className="w-full">
-                            <p className="font-playfair italic text-xl text-center">
-                                Leave Us a Comment
-                            </p>
+                            <LabelInput text="Leave Us a Comment" />
                             <InputTextArea
                                 name="comment"
                                 placeholder="Comment"
@@ -124,9 +121,7 @@ export default function Review({ auth }) {
                             />
                         </div>
                         <div className="w-fit mx-auto">
-                            <p className="font-playfair italic text-xl">
-                                How Would You Rate Us?
-                            </p>
+                            <LabelInput text="How Would You Rate Us?" />
                             <StarRatingInput
                                 rating={data.rating}
                                 setRating={(value) => setData("rating", value)}

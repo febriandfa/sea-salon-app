@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Branch;
+use App\Models\BranchService;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -24,7 +26,9 @@ class BranchAdminController extends Controller
      */
     public function create()
     {
-        //
+        $services = Service::all();
+
+        return Inertia::render('Admin/Branch/BranchCreate', compact('services'));
     }
 
     /**
@@ -32,7 +36,23 @@ class BranchAdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $branch = Branch::create([
+            'name' => $request->name,
+            'location' => $request->location,
+            'open_time' => $request->open_time,
+            'close_time' => $request->close_time
+        ]);
+
+        $serviceIds = $request->availableServices;
+
+        foreach ($serviceIds as $serviceId) {
+            BranchService::create([
+                'branch_id' => $branch->id,
+                'service_id' => $serviceId
+            ]);
+        }
+
+        return back();
     }
 
     /**

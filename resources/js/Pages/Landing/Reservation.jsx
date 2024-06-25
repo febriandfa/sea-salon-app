@@ -9,6 +9,7 @@ import BranchCard from "@/Components/molecules/BranchCard";
 import LandingLayout from "@/Layouts/LandingLayout";
 import { router, useForm, usePage } from "@inertiajs/react";
 import PrimaryLink from "@/Components/atoms/PrimaryLink";
+import LabelInput from "@/Components/atoms/LabelInput";
 
 export default function Reservation({ auth }) {
     const { contacts, service, branchServices } = usePage().props;
@@ -84,9 +85,7 @@ export default function Reservation({ auth }) {
                         >
                             <form onSubmit={onSubmit} className="space-y-4">
                                 <div className="w-full">
-                                    <p className="font-playfair italic text-xl text-center">
-                                        What Is Your Name?
-                                    </p>
+                                    <LabelInput text="What Is Your Name?" />
                                     <InputText
                                         name="name"
                                         placeholder="Name"
@@ -97,9 +96,7 @@ export default function Reservation({ auth }) {
                                     />
                                 </div>
                                 <div className="w-full">
-                                    <p className="font-playfair italic text-xl text-center">
-                                        What Is Your Phone Number?
-                                    </p>
+                                    <LabelInput text="What Is Your Phone Number?" />
                                     <InputText
                                         name="phone_number"
                                         placeholder="Phone Number"
@@ -113,9 +110,7 @@ export default function Reservation({ auth }) {
                                     />
                                 </div>
                                 <div className="w-full">
-                                    <p className="font-playfair italic text-xl text-center">
-                                        When Will You Come?
-                                    </p>
+                                    <LabelInput text="When Will You Come?" />
                                     <div className="flex items-center gap-2">
                                         <InputDate
                                             name="date"

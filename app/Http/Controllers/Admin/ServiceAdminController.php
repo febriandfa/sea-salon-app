@@ -24,7 +24,7 @@ class ServiceAdminController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Admin/Service/ServiceCreate');
     }
 
     /**
@@ -32,7 +32,15 @@ class ServiceAdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Service::create([
+            'name' => $request->name,
+            'duration' => $request->duration,
+            'price' => $request->price,
+            'description' => $request->description,
+            'member_only' => $request->member_only
+        ]);
+
+        return back();
     }
 
     /**

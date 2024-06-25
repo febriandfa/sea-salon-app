@@ -1,3 +1,4 @@
+import PrimaryLink from "@/Components/atoms/PrimaryLink";
 import Subtitle from "@/Components/atoms/Subtitle";
 import BranchListCard from "@/Components/molecules/BranchListCard";
 import DashboardLayout from "@/Layouts/DashboardLayout";
@@ -9,6 +10,12 @@ export default function BranchIndex({ auth }) {
     return (
         <DashboardLayout userLogin={auth.user}>
             <Subtitle>Branches</Subtitle>
+            <div className="mt-6 flex justify-center">
+                <PrimaryLink
+                    link={route("branch-admin.create")}
+                    text="Add Branch"
+                />
+            </div>
             <div className="my-6 space-y-3 w-4/5 mx-auto">
                 {branches.map((branch) => {
                     return (

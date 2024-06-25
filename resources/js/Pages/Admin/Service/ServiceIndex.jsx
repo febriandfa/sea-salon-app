@@ -1,4 +1,5 @@
 import Label from "@/Components/atoms/Label";
+import PrimaryLink from "@/Components/atoms/PrimaryLink";
 import Subtitle from "@/Components/atoms/Subtitle";
 import ServiceListCard from "@/Components/molecules/ServiceListCard";
 import DashboardLayout from "@/Layouts/DashboardLayout";
@@ -10,6 +11,12 @@ export default function ServiceIndex({ auth }) {
     return (
         <DashboardLayout userLogin={auth.user}>
             <Subtitle>Services</Subtitle>
+            <div className="mt-6 flex justify-center">
+                <PrimaryLink
+                    link={route("service-admin.create")}
+                    text="Add Service"
+                />
+            </div>
             <div className="my-6 space-y-3 w-4/5 mx-auto">
                 {services.map((service) => {
                     return (
