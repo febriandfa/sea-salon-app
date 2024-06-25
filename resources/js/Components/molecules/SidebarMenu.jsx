@@ -75,7 +75,7 @@ export default function SidebarMenu({ userLogin }) {
             ),
             link: route("reservation-admin.index"),
             menu: "Reservation",
-            active: "",
+            active: url.startsWith("/admin/reservation-admin"),
         },
         {
             icon: (
@@ -109,7 +109,7 @@ export default function SidebarMenu({ userLogin }) {
             ),
             link: route("review-admin.index"),
             menu: "Review",
-            active: "",
+            active: url.startsWith("/admin/review-admin"),
         },
         {
             icon: (
@@ -126,7 +126,7 @@ export default function SidebarMenu({ userLogin }) {
             ),
             link: route("contact-admin.index"),
             menu: "Contact",
-            active: "",
+            active: url.startsWith("/admin/contact-admin"),
         },
     ];
 

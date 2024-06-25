@@ -14,7 +14,7 @@ export default function ReservationCard({
 }) {
     return (
         <div className="bg-white p-3 shadow-lg border border-gold-700 rounded-lg w-4/5 mx-auto space-y-3">
-            <div className="flex items-center justify-around">
+            <div className="flex items-center justify-between">
                 <div>
                     <div>
                         <p className="font-playfair italic text-xl text-gold-700">
