@@ -8,58 +8,30 @@ import Subtitle from "@/Components/atoms/Subtitle";
 import DashboardLayout from "@/Layouts/DashboardLayout";
 import { useForm, usePage } from "@inertiajs/react";
 
-export default function BranchCreate({ auth }) {
-    const { services } = usePage().props;
+export default function BranchEdit({ auth }) {
+    const { branch, services } = usePage().props;
 
     const { data, setData, post, errors } = useForm({
-        name: "",
-        location: "",
-        open_time: "",
-        close_time: "",
-        availableServices: [],
+        name: branch.name,
+        location: branch.location,
+        open_time: branch.open_time,
+        close_time: branch.close_time,
+        availableServices: branch.branch_services.map(
+            (branchService) => branchService.service_id
+        ),
     });
-
-    console.log(data);
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        post(route("branch-admin.store"), {
-            data,
-            onSuccess: () => {
-                setData({
-                    name: "",
-                    location: "",
-                    open_time: "",
-                    close_time: "",
-                    availableServices: [],
-                });
-            },
-        });
-    };
-
-    const handleCheckboxChange = (serviceId) => {
-        let checkedValue;
-        if (data.availableServices.includes(serviceId)) {
-            checkedValue = data.availableServices.filter(
-                (id) => id !== serviceId
-            );
-        } else {
-            checkedValue = [...data.availableServices, serviceId];
-        }
-        setData("availableServices", checkedValue);
-    };
 
     return (
         <DashboardLayout userLogin={auth.user}>
-            <Subtitle>Add Branch</Subtitle>
-            <form onSubmit={onSubmit} className="my-6 space-y-3 w-4/5 mx-auto">
+            <Subtitle>Branch Detail</Subtitle>
+            <div className="my-6 space-y-3 w-4/5 mx-auto">
                 <div className="w-full">
                     <LabelInput text="Branch Name" />
                     <InputText
                         name="name"
                         placeholder="Name"
                         value={data.name}
-                        onChange={(e) => setData("name", e.target.value)}
+                        disabled
                     />
                 </div>
                 <div className="w-full flex gap-3">
@@ -69,9 +41,7 @@ export default function BranchCreate({ auth }) {
                             name="open_time"
                             placeholder="Open Time"
                             value={data.open_time}
-                            onChange={(e) =>
-                                setData("open_time", e.target.value)
-                            }
+                            disabled
                         />
                     </div>
                     <div className="w-full">
@@ -80,9 +50,7 @@ export default function BranchCreate({ auth }) {
                             name="close_time"
                             placeholder="Close Time"
                             value={data.close_time}
-                            onChange={(e) =>
-                                setData("close_time", e.target.value)
-                            }
+                            disabled
                         />
                     </div>
                 </div>
@@ -92,7 +60,7 @@ export default function BranchCreate({ auth }) {
                         name="location"
                         placeholder="Location"
                         value={data.location}
-                        onChange={(e) => setData("location", e.target.value)}
+                        disabled
                     />
                 </div>
                 <div className="w-full">
@@ -110,9 +78,7 @@ export default function BranchCreate({ auth }) {
                                         checked={data.availableServices
                                             .toString()
                                             .includes(service.id)}
-                                        onChange={() =>
-                                            handleCheckboxChange(service.id)
-                                        }
+                                        disabled
                                         className="form-checkbox h-5 w-5 text-gold-700 checked:bg-gold-700"
                                     />
                                     <label htmlFor={`service-${service.id}`}>
@@ -123,10 +89,7 @@ export default function BranchCreate({ auth }) {
                         })}
                     </div>
                 </div>
-                <div className="w-fit mx-auto">
-                    <PrimaryButton type="submit" text="Save" />
-                </div>
-            </form>
+            </div>
         </DashboardLayout>
     );
 }

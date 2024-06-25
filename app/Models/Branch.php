@@ -17,4 +17,8 @@ class Branch extends Model
         'open_time',
         'close_time'
     ];
+
+    public function branchServices() {
+        return $this->hasMany(BranchService::class, 'branch_id', 'id');
+    }
 }

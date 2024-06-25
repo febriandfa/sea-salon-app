@@ -57,14 +57,6 @@ export default function ReservationListCard({
             </div>
             <div className="bg-white p-2 shadow-lg border border-gold-700 rounded-lg w-fit mx-auto flex flex-col justify-evenly gap-3">
                 <PrimaryLink
-                    link={route("reservation-admin.show", id)}
-                    text="Show"
-                />
-                <PrimaryLink
-                    link={route("reservation-admin.edit", id)}
-                    text="Edit"
-                />
-                <PrimaryLink
                     method="DELETE"
                     as="button"
                     link={route("reservation-admin.destroy", id)}

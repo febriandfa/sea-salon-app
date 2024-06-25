@@ -64,6 +64,6 @@ class ReviewAdminController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Review::where('id', $id)->delete();
     }
 }

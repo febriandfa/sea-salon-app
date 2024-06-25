@@ -21,14 +21,6 @@ export default function ReviewListCard({ id, name, date, rating, comment }) {
             </div>
             <div className="bg-white p-2 shadow-lg border border-gold-700 rounded-lg w-fit mx-auto flex flex-col justify-evenly gap-3">
                 <PrimaryLink
-                    link={route("review-admin.show", id)}
-                    text="Show"
-                />
-                <PrimaryLink
-                    link={route("review-admin.edit", id)}
-                    text="Edit"
-                />
-                <PrimaryLink
                     method="DELETE"
                     as="button"
                     link={route("review-admin.destroy", id)}

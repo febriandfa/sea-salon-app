@@ -3,6 +3,7 @@ export default function InputTextArea({
     placeholder = "",
     value,
     onChange,
+    disabled = false,
 }) {
     return (
         <textarea
@@ -12,6 +13,7 @@ export default function InputTextArea({
             rows={7}
             value={value}
             onChange={onChange}
+            disabled={disabled}
             className="border-2 border-gray-400 rounded-xl focus:ring-gold-700 focus:border-gold-700 w-full"
         >
             {value}

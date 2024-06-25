@@ -64,6 +64,6 @@ class ReservationAdminController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Reservation::where('id', $id)->delete();
     }
 }

@@ -5,36 +5,28 @@ import LabelInput from "@/Components/atoms/LabelInput";
 import PrimaryButton from "@/Components/atoms/PrimaryButton";
 import Subtitle from "@/Components/atoms/Subtitle";
 import DashboardLayout from "@/Layouts/DashboardLayout";
-import { useForm } from "@inertiajs/react";
+import { useForm, usePage } from "@inertiajs/react";
 
-export default function ServiceCreate({ auth }) {
+export default function ServiceEdit({ auth }) {
+    const { service } = usePage().props;
+
     const memberOnlyDatas = [
         { label: "Yes", value: "Y" },
         { label: "No", value: "N" },
     ];
 
     const { data, setData, post, errors } = useForm({
-        name: "",
-        duration: "",
-        price: "",
-        description: "",
-        member_only: "",
+        _method: "PATCH",
+        name: service.name,
+        duration: service.duration,
+        price: service.price,
+        description: service.description,
+        member_only: service.member_only,
     });
 
     const onSubmit = (e) => {
         e.preventDefault();
-        post(route("service-admin.store"), {
-            data,
-            onSuccess: () => {
-                setData({
-                    name: "",
-                    duration: "",
-                    price: "",
-                    description: "",
-                    member_only: "",
-                });
-            },
-        });
+        post(route("service-admin.update", service.id));
     };
 
     console.log(data);

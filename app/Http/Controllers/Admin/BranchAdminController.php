@@ -60,7 +60,11 @@ class BranchAdminController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $branch = Branch::where('id', $id)->with(['branchServices'])->first();
+
+        $services = Service::all();
+
+        return Inertia::render('Admin/Branch/BranchShow', compact('branch', 'services'));
     }
 
     /**
@@ -68,7 +72,11 @@ class BranchAdminController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $branch = Branch::where('id', $id)->with(['branchServices'])->first();
+
+        $services = Service::all();
+
+        return Inertia::render('Admin/Branch/BranchEdit', compact('branch', 'services'));
     }
 
     /**
@@ -76,7 +84,22 @@ class BranchAdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $branch = Branch::where('id', $id);
+        $branchUpdate = $request->only(['name', 'location', 'open_time', 'close_time']);
+        $branch->update($branchUpdate);
+
+        BranchService::where('branch_id', $id)->delete();
+
+        $serviceIds = $request->availableServices;
+
+        foreach ($serviceIds as $serviceId) {
+            BranchService::create([
+                'branch_id' => $id,
+                'service_id' => $serviceId
+            ]);
+        }
+
+        return back();
     }
 
     /**
@@ -84,6 +107,7 @@ class BranchAdminController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Branch::where('id', $id)->delete();
+        BranchService::where('branch_id', $id)->delete();
     }
 }

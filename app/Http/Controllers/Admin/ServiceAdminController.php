@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BranchService;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -48,7 +49,9 @@ class ServiceAdminController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $service = Service::where('id', $id)->first();
+
+        return Inertia::render('Admin/Service/ServiceShow', compact('service'));
     }
 
     /**
@@ -56,7 +59,9 @@ class ServiceAdminController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $service = Service::where('id', $id)->first();
+
+        return Inertia::render('Admin/Service/ServiceEdit', compact('service'));
     }
 
     /**
@@ -64,7 +69,11 @@ class ServiceAdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $service = Service::where('id', $id);
+        $serviceUpdate = $request->only(['name', 'duration', 'price', 'description', 'member_only']);
+        $service->update($serviceUpdate);
+
+        return back();
     }
 
     /**
@@ -72,6 +81,7 @@ class ServiceAdminController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Service::where('id', $id)->delete();
+        BranchService::where('service_id', $id)->delete();
     }
 }

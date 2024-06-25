@@ -8,33 +8,25 @@ import Subtitle from "@/Components/atoms/Subtitle";
 import DashboardLayout from "@/Layouts/DashboardLayout";
 import { useForm, usePage } from "@inertiajs/react";
 
-export default function BranchCreate({ auth }) {
-    const { services } = usePage().props;
+export default function BranchEdit({ auth }) {
+    const { branch, services } = usePage().props;
 
     const { data, setData, post, errors } = useForm({
-        name: "",
-        location: "",
-        open_time: "",
-        close_time: "",
-        availableServices: [],
+        _method: "PATCH",
+        name: branch.name,
+        location: branch.location,
+        open_time: branch.open_time,
+        close_time: branch.close_time,
+        availableServices: branch.branch_services.map(
+            (branchService) => branchService.service_id
+        ),
     });
 
-    console.log(data);
+    console.log(branch);
 
     const onSubmit = (e) => {
         e.preventDefault();
-        post(route("branch-admin.store"), {
-            data,
-            onSuccess: () => {
-                setData({
-                    name: "",
-                    location: "",
-                    open_time: "",
-                    close_time: "",
-                    availableServices: [],
-                });
-            },
-        });
+        post(route("branch-admin.update", branch.id));
     };
 
     const handleCheckboxChange = (serviceId) => {
