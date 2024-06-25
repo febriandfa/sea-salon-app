@@ -1,10 +1,16 @@
 <?php
 
+use App\Http\Controllers\Admin\BranchAdminController;
+use App\Http\Controllers\Admin\ContactAdminController;
 use App\Http\Controllers\Admin\DashboardAdminController;
+use App\Http\Controllers\Admin\ReservationAdminController;
+use App\Http\Controllers\Admin\ReviewAdminController;
+use App\Http\Controllers\Admin\ServiceAdminController;
 use App\Http\Controllers\Customer\DashboardCustomerController;
 use App\Http\Controllers\Customer\ReservationCustomerController;
 use App\Http\Controllers\Customer\ReviewCustomerController;
 use App\Http\Controllers\Customer\ServiceCustomerController;
+use App\Http\Controllers\Customer\SpecialServiceCustomerController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Contact;
 use App\Models\Product;
@@ -37,13 +43,14 @@ use Inertia\Inertia;
 Route::get('/', function () {
     $contacts = Contact::with(['users'])->get();
 
-    return Inertia::render('Customer/Home', compact('contacts'));
+    return Inertia::render('Landing/Home', compact('contacts'));
 })->name('home');
+
 Route::get('/product', function () {
     $contacts = Contact::with(['users'])->get();
     $products = Product::all();
 
-    return Inertia::render('Customer/Product', compact('contacts', 'products'));
+    return Inertia::render('Landing/Product', compact('contacts', 'products'));
 })->name('product');
 
 Route::resources([
@@ -57,6 +64,11 @@ Route::group(['middleware' => 'role:admin'], function () {
     Route::prefix('admin')->group(function () {
         Route::resources([
             'dashboard-admin' => DashboardAdminController::class,
+            'service-admin' => ServiceAdminController::class,
+            'branch-admin' => BranchAdminController::class,
+            'review-admin' => ReviewAdminController::class,
+            'reservation-admin' => ReservationAdminController::class,
+            'contact-admin' => ContactAdminController::class,
         ]);
     });
 });
@@ -64,7 +76,9 @@ Route::group(['middleware' => 'role:admin'], function () {
 Route::group(['middleware' => ['auth', 'role:customer']], function () {
     Route::prefix('customer')->group(function () {
         Route::resources([
-            'dashboard' => DashboardCustomerController::class
+            'dashboard-customer' => DashboardCustomerController::class,
+            'reservation-customer' => ReservationCustomerController::class,
+            'service-customer' => SpecialServiceCustomerController::class
         ]);
     });
 });

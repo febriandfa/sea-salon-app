@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Review;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ReviewAdminController extends Controller
 {
@@ -12,7 +14,9 @@ class ReviewAdminController extends Controller
      */
     public function index()
     {
-        //
+        $reviews = Review::all();
+
+        return Inertia::render('Admin/Review/ReviewIndex', compact('reviews'));
     }
 
     /**

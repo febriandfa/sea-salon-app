@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\BranchService;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class ServiceAdminController extends Controller
+class SpecialServiceCustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $services = Service::all();
+        $services = Service::where('member_only', 'Y')->get();
 
-        return Inertia::render('Admin/Service/ServiceIndex', compact('services'));
+        return Inertia::render('Customer/Dashboard/Service/ServiceIndex', compact('services'));
     }
 
     /**
@@ -40,7 +41,10 @@ class ServiceAdminController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $service = Service::where('id', $id)->first();
+        $branchServices = BranchService::where('service_id', $id)->with(['branches', 'services'])->get();
+
+        return Inertia::render('Customer/Dashboard/Service/ServiceShow', compact('service', 'branchServices'));
     }
 
     /**

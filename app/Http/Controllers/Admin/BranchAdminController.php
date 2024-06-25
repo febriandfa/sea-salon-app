@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Branch;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class BranchAdminController extends Controller
 {
@@ -12,7 +14,9 @@ class BranchAdminController extends Controller
      */
     public function index()
     {
-        //
+        $branches = Branch::all();
+
+        return Inertia::render('Admin/Branch/BranchIndex', compact('branches'));
     }
 
     /**

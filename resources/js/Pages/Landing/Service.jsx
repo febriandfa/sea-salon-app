@@ -1,5 +1,3 @@
-import NavAuthLink from "@/Components/atoms/NavAuthLink";
-import Separator from "@/Components/atoms/Separator";
 import Subtitle from "@/Components/atoms/Subtitle";
 import Title from "@/Components/atoms/Title";
 import ServiceCard from "@/Components/molecules/ServiceCard";
@@ -8,7 +6,6 @@ import { Link, usePage } from "@inertiajs/react";
 
 export default function Service({ auth }) {
     const { services, contacts } = usePage().props;
-    console.log(services);
 
     return (
         <LandingLayout userLogin={auth.user} contactDatas={contacts}>
@@ -28,18 +25,17 @@ export default function Service({ auth }) {
             </article>
             <article className="h-full mt-12">
                 <div className="grid grid-cols-3 w-4/5 mx-auto gap-8">
-                    {services.map((service) => {
-                        return (
-                            <ServiceCard
-                                id={service.id}
-                                name={service.name}
-                                duration={service.duration}
-                                price={service.price}
-                                description={service.description}
-                                member={service.member_only}
-                            />
-                        );
-                    })}
+                    {services.map((service) => (
+                        <ServiceCard
+                            key={service.id}
+                            id={service.id}
+                            name={service.name}
+                            duration={service.duration}
+                            price={service.price}
+                            description={service.description}
+                            member={service.member_only}
+                        />
+                    ))}
                 </div>
             </article>
             <article className="min-h-screen mt-12 flex flex-col items-center justify-center space-y-6">

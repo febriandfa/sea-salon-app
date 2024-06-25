@@ -45,11 +45,18 @@ class RegisteredUserController extends Controller
             'role' => 'customer',
             'password' => Hash::make($request->password),
         ]);
+        $user->assignRole('customer');
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        if (Auth::user()->hasRole('admin')) {
+            return redirect()->intended(RouteServiceProvider::HOME_ADMIN);
+        } else if (Auth::user()->hasRole('customer')) {
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
+
+        // return redirect(RouteServiceProvider::HOME);
     }
 }

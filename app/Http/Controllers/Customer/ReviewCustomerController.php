@@ -19,7 +19,7 @@ class ReviewCustomerController extends Controller
         $contacts = Contact::with(['users'])->get();
         $reviews = Review::paginate(6);
 
-        return Inertia::render('Customer/Review', compact('contacts', 'reviews'));
+        return Inertia::render('Landing/Review', compact('contacts', 'reviews'));
     }
 
     /**

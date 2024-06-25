@@ -10,7 +10,7 @@ export default function NavAuthMenu({ userLogin }) {
     return (
         <ul className="flex items-center gap-6">
             {userLogin ? (
-                <NavProfileButton />
+                <NavProfileButton userLogin={userLogin} />
             ) : (
                 authMenus.map((authMenu) => {
                     return (

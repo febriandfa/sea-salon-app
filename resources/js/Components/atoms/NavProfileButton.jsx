@@ -2,7 +2,7 @@ import { useState } from "react";
 import NavLink from "./NavLink";
 import { Link } from "@inertiajs/react";
 
-export default function NavProfileButton() {
+export default function NavProfileButton({ isDashboard = false, userLogin }) {
     const [open, isOpen] = useState(false);
 
     const handleOpenMenu = () => {
@@ -43,7 +43,19 @@ export default function NavProfileButton() {
             {open && (
                 <div className="bg-white shadow-lg p-6 absolute -left-12">
                     <ul className="space-y-4">
-                        <NavLink link={route("dashboard")} menu="Dashboard" />
+                        {!isDashboard && (
+                            <NavLink
+                                link={
+                                    userLogin.role === "customer"
+                                        ? route("dashboard-customer.index")
+                                        : route("dashboard-admin.index")
+                                }
+                                menu="Dashboard"
+                            />
+                        )}
+                        {isDashboard && (
+                            <NavLink link={route("home")} menu="Homepage" />
+                        )}
                         <Link
                             as="button"
                             method="POST"

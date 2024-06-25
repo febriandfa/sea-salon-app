@@ -7,6 +7,7 @@ use App\Models\Branch;
 use App\Models\Reservation;
 use App\Models\Service;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -18,9 +19,18 @@ class ReservationCustomerController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::where('user_id', Auth::user()->id)->get();
+        $currentDate = Carbon::today();
+        $currentTime = Carbon::now()->format('H:i:s');
 
-        return Inertia::render('Customer/Reservation/IndexReservation', compact('reservation'));
+        $reservations = Reservation::where('user_id', Auth::user()->id)
+                    ->with(['users', 'services', 'branches'])
+                    ->get();
+        $currentReservations = Reservation::where('user_id', Auth::user()->id)
+                        ->where('date', '>=', $currentDate)
+                        ->with(['users', 'services', 'branches'])
+                        ->get();
+
+        return Inertia::render('Customer/Dashboard/Reservation/ReservationIndex', compact('reservations', 'currentReservations'));
     }
 
     /**
@@ -37,6 +47,7 @@ class ReservationCustomerController extends Controller
     public function store(Request $request)
     {
         $reservation = Reservation::create([
+            'user_id' => Auth::user() ? Auth::user()->id : null,
             'name' => $request->name,
             'phone_number' => $request->phone_number,
             'service_id' => $request->service_id,
@@ -72,12 +83,7 @@ class ReservationCustomerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $reservation = Reservation::find($id);
-        $reservationUpdate = $request->only(['service_id', 'datetime']);
-
-        $reservation->update($reservationUpdate);
-
-        return back();
+        //
     }
 
     /**
@@ -85,11 +91,7 @@ class ReservationCustomerController extends Controller
      */
     public function destroy(string $id)
     {
-        $reservation = Reservation::find($id);
-
-        $reservation->delete();
-
-        return back();
+        //
     }
 
     public function download($custName, $custPhone, $serviceId, $branchId, $date, $time)

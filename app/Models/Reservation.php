@@ -12,6 +12,7 @@ class Reservation extends Model
     protected $table = 'reservations';
 
     protected $fillable = [
+        'user_id',
         'name',
         'phone_number',
         'service_id',
@@ -26,5 +27,9 @@ class Reservation extends Model
 
     public function branches() {
         return $this->belongsTo(Branch::class, 'branch_id', 'id');
+    }
+
+    public function users() {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

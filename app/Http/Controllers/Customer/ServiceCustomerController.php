@@ -19,7 +19,7 @@ class ServiceCustomerController extends Controller
         $contacts = Contact::with(['users'])->get();
         $services = Service::all();
 
-        return Inertia::render('Customer/Service', compact('contacts', 'services'));
+        return Inertia::render('Landing/Service', compact('contacts', 'services'));
     }
 
     /**
@@ -47,7 +47,7 @@ class ServiceCustomerController extends Controller
         $service = Service::where('id', $id)->first();
         $branchServices = BranchService::where('service_id', $id)->with(['branches', 'services'])->get();
 
-        return Inertia::render('Customer/Reservation', compact('contacts', 'service', 'branchServices'));
+        return Inertia::render('Landing/Reservation', compact('contacts', 'service', 'branchServices'));
     }
 
     /**
