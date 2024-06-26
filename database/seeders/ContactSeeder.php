@@ -15,16 +15,19 @@ class ContactSeeder extends Seeder
     {
         $contacts = [
             [
-                'user_id' => '1',
+                'name' => 'Thomas',
+                'phone_number' => '08123456789'
             ],
             [
-                'user_id' => '2',
+                'name' => 'Sekar',
+                'phone_number' => '08164829372'
             ]
         ];
 
         foreach ($contacts as $contact) {
             $contact = Contact::create([
-                'user_id' => $contact['user_id'],
+                'name' => $contact['name'],
+                'phone_number' => $contact['phone_number']
             ]);
         }
     }

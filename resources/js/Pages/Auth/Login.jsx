@@ -4,6 +4,7 @@ import InputPassword from "@/Components/atoms/InputPassword";
 import InputText from "@/Components/atoms/InputText";
 import PrimaryButton from "@/Components/atoms/PrimaryButton";
 import { Link, useForm } from "@inertiajs/react";
+import Swal from "sweetalert2";
 
 export default function Login() {
     const { data, setData, post, errors } = useForm({
@@ -14,6 +15,12 @@ export default function Login() {
     const handleOnSubmit = (e) => {
         e.preventDefault();
         post(route("login"));
+        Swal.fire({
+            icon: "success",
+            title: "Logged In!",
+            showConfirmButton: false,
+            timer: 1000,
+        });
     };
 
     return (

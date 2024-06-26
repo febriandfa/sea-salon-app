@@ -5,26 +5,21 @@ import LabelInput from "@/Components/atoms/LabelInput";
 import PrimaryButton from "@/Components/atoms/PrimaryButton";
 import Subtitle from "@/Components/atoms/Subtitle";
 import DashboardLayout from "@/Layouts/DashboardLayout";
-import { useForm } from "@inertiajs/react";
+import { useForm, usePage } from "@inertiajs/react";
 import Swal from "sweetalert2";
 
 export default function ContactCreate({ auth }) {
+    const { contact } = usePage().props;
+
     const { data, setData, post, errors } = useForm({
-        name: "",
-        phone_number: "",
+        _method: "PATCH",
+        name: contact.name,
+        phone_number: contact.phone_number,
     });
 
     const onSubmit = (e) => {
         e.preventDefault();
-        post(route("contact-admin.store"), {
-            data,
-            onSuccess: () => {
-                setData({
-                    name: "",
-                    phone_number: "",
-                });
-            },
-        });
+        post(route("contact-admin.update", contact.id));
         Swal.fire({
             icon: "success",
             title: "Success!",
@@ -35,7 +30,7 @@ export default function ContactCreate({ auth }) {
 
     return (
         <DashboardLayout userLogin={auth.user}>
-            <Subtitle>Add Contact</Subtitle>
+            <Subtitle>Edit Contact</Subtitle>
             <form onSubmit={onSubmit} className="my-6 space-y-3 w-4/5 mx-auto">
                 <div className="w-full">
                     <LabelInput text="Name" />

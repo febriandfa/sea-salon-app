@@ -7,6 +7,7 @@ import PrimaryButton from "@/Components/atoms/PrimaryButton";
 import Subtitle from "@/Components/atoms/Subtitle";
 import DashboardLayout from "@/Layouts/DashboardLayout";
 import { useForm, usePage } from "@inertiajs/react";
+import Swal from "sweetalert2";
 
 export default function BranchEdit({ auth }) {
     const { branch, services } = usePage().props;
@@ -27,6 +28,12 @@ export default function BranchEdit({ auth }) {
     const onSubmit = (e) => {
         e.preventDefault();
         post(route("branch-admin.update", branch.id));
+        Swal.fire({
+            icon: "success",
+            title: "Success!",
+            showConfirmButton: false,
+            timer: 1000,
+        });
     };
 
     const handleCheckboxChange = (serviceId) => {
@@ -43,7 +50,7 @@ export default function BranchEdit({ auth }) {
 
     return (
         <DashboardLayout userLogin={auth.user}>
-            <Subtitle>Add Branch</Subtitle>
+            <Subtitle>Edit Branch</Subtitle>
             <form onSubmit={onSubmit} className="my-6 space-y-3 w-4/5 mx-auto">
                 <div className="w-full">
                     <LabelInput text="Branch Name" />

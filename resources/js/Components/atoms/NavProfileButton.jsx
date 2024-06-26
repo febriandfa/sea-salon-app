@@ -1,12 +1,32 @@
 import { useState } from "react";
 import NavLink from "./NavLink";
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
+import Swal from "sweetalert2";
 
 export default function NavProfileButton({ isDashboard = false, userLogin }) {
     const [open, isOpen] = useState(false);
 
     const handleOpenMenu = () => {
         isOpen(!open);
+    };
+
+    const handleOnClick = () => {
+        Swal.fire({
+            title: "Logout?",
+            icon: "warning",
+            showCancelButton: true,
+            showConfirmButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.post(route("logout"));
+                Swal.fire({
+                    title: "Logged Out!",
+                    icon: "success",
+                    timer: 1000,
+                    showConfirmButton: false,
+                });
+            }
+        });
     };
 
     return (
@@ -56,14 +76,15 @@ export default function NavProfileButton({ isDashboard = false, userLogin }) {
                         {isDashboard && (
                             <NavLink link={route("home")} menu="Homepage" />
                         )}
-                        <Link
-                            as="button"
-                            method="POST"
-                            href={route("logout")}
+                        <button
+                            // as="button"
+                            // method="POST"
+                            // href={route("logout")}
+                            onClick={handleOnClick}
                             className="hover:text-gold-700 hover:font-semibold hover:border-b-2 border-b-gold-700"
                         >
                             Logout
-                        </Link>
+                        </button>
                     </ul>
                 </div>
             )}

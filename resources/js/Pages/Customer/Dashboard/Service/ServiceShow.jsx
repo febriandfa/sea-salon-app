@@ -9,6 +9,7 @@ import SpecialServiceCard from "@/Components/molecules/SpecialServiceCard";
 import DashboardLayout from "@/Layouts/DashboardLayout";
 import { useForm, usePage } from "@inertiajs/react";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function ServiceShow({ auth }) {
     const { service, branchServices } = usePage().props;
@@ -39,6 +40,12 @@ export default function ServiceShow({ auth }) {
                 ]);
                 setData({ date: "", time: "" });
             },
+        });
+        Swal.fire({
+            icon: "success",
+            title: "Success!",
+            showConfirmButton: false,
+            timer: 1000,
         });
     };
 

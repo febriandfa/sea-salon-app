@@ -12,6 +12,7 @@ import LandingLayout from "@/Layouts/LandingLayout";
 import { formatDate } from "@/Utils/formatDate";
 import { Link, useForm, usePage } from "@inertiajs/react";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function Review({ auth }) {
     const { reviews, contacts } = usePage().props;
@@ -29,6 +30,12 @@ export default function Review({ auth }) {
             onSuccess: () => {
                 setData({ name: "", rating: "", comment: "" });
             },
+        });
+        Swal.fire({
+            icon: "success",
+            title: "Success!",
+            showConfirmButton: false,
+            timer: 1000,
         });
     };
 

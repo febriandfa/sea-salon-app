@@ -7,6 +7,7 @@ import PrimaryButton from "@/Components/atoms/PrimaryButton";
 import Subtitle from "@/Components/atoms/Subtitle";
 import DashboardLayout from "@/Layouts/DashboardLayout";
 import { useForm, usePage } from "@inertiajs/react";
+import Swal from "sweetalert2";
 
 export default function BranchCreate({ auth }) {
     const { services } = usePage().props;
@@ -34,6 +35,12 @@ export default function BranchCreate({ auth }) {
                     availableServices: [],
                 });
             },
+        });
+        Swal.fire({
+            icon: "success",
+            title: "Success!",
+            showConfirmButton: false,
+            timer: 1000,
         });
     };
 

@@ -4,6 +4,7 @@ import InputPassword from "@/Components/atoms/InputPassword";
 import InputText from "@/Components/atoms/InputText";
 import PrimaryButton from "@/Components/atoms/PrimaryButton";
 import { Link, useForm } from "@inertiajs/react";
+import Swal from "sweetalert2";
 
 export default function Register() {
     const { data, setData, post, errors } = useForm({
@@ -16,6 +17,12 @@ export default function Register() {
     const handleOnSubmit = (e) => {
         e.preventDefault();
         post(route("register"));
+        Swal.fire({
+            icon: "success",
+            title: "Register Success!",
+            showConfirmButton: false,
+            timer: 1000,
+        });
     };
 
     return (

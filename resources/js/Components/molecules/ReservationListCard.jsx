@@ -2,6 +2,7 @@ import { formatDate } from "@/Utils/formatDate";
 import Separator from "../atoms/Separator";
 import { formatTime } from "@/Utils/formatTime";
 import PrimaryLink from "../atoms/PrimaryLink";
+import DeleteButton from "../atoms/DeleteButton";
 
 export default function ReservationListCard({
     name,
@@ -56,12 +57,7 @@ export default function ReservationListCard({
                 <p className="text-center">{location}</p>
             </div>
             <div className="bg-white p-2 shadow-lg border border-gold-700 rounded-lg w-fit mx-auto flex flex-col justify-evenly gap-3">
-                <PrimaryLink
-                    method="DELETE"
-                    as="button"
-                    link={route("reservation-admin.destroy", id)}
-                    text="Delete"
-                />
+                <DeleteButton link={route("reservation-admin.destroy", id)} />
             </div>
         </div>
     );

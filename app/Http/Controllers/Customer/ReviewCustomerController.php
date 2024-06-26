@@ -16,7 +16,7 @@ class ReviewCustomerController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::with(['users'])->get();
+        $contacts = Contact::all();
         $reviews = Review::paginate(6);
 
         return Inertia::render('Landing/Review', compact('contacts', 'reviews'));

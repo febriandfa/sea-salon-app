@@ -1,3 +1,4 @@
+import DeleteButton from "../atoms/DeleteButton";
 import Label from "../atoms/Label";
 import PrimaryLink from "../atoms/PrimaryLink";
 
@@ -39,12 +40,7 @@ export default function ServiceListCard({
                     link={route("service-admin.edit", id)}
                     text="Edit"
                 />
-                <PrimaryLink
-                    method="DELETE"
-                    as="button"
-                    link={route("service-admin.destroy", id)}
-                    text="Delete"
-                />
+                <DeleteButton link={route("service-admin.destroy", id)} />
             </div>
         </div>
     );

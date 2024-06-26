@@ -41,13 +41,13 @@ use Inertia\Inertia;
 // });
 
 Route::get('/', function () {
-    $contacts = Contact::with(['users'])->get();
+    $contacts = Contact::all();
 
     return Inertia::render('Landing/Home', compact('contacts'));
 })->name('home');
 
 Route::get('/product', function () {
-    $contacts = Contact::with(['users'])->get();
+    $contacts = Contact::all();
     $products = Product::all();
 
     return Inertia::render('Landing/Product', compact('contacts', 'products'));

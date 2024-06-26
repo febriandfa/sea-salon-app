@@ -25,9 +25,9 @@ export default function Footer({ contactDatas }) {
                                 return (
                                     <div className="flex gap-3 justify-center">
                                         <p className="font-medium">
-                                            {contact.users.name} :{" "}
+                                            {contact.name} :{" "}
                                         </p>
-                                        <p>{contact.users.phone_number}</p>
+                                        <p>{contact.phone_number}</p>
                                     </div>
                                 );
                             })}

@@ -6,6 +6,7 @@ import PrimaryButton from "@/Components/atoms/PrimaryButton";
 import Subtitle from "@/Components/atoms/Subtitle";
 import DashboardLayout from "@/Layouts/DashboardLayout";
 import { useForm, usePage } from "@inertiajs/react";
+import Swal from "sweetalert2";
 
 export default function ServiceEdit({ auth }) {
     const { service } = usePage().props;
@@ -27,6 +28,12 @@ export default function ServiceEdit({ auth }) {
     const onSubmit = (e) => {
         e.preventDefault();
         post(route("service-admin.update", service.id));
+        Swal.fire({
+            icon: "success",
+            title: "Success!",
+            showConfirmButton: false,
+            timer: 1000,
+        });
     };
 
     console.log(data);
@@ -37,7 +44,7 @@ export default function ServiceEdit({ auth }) {
 
     return (
         <DashboardLayout userLogin={auth.user}>
-            <Subtitle>Add Service</Subtitle>
+            <Subtitle>Edit Service</Subtitle>
             <form onSubmit={onSubmit} className="my-6 space-y-3 w-4/5 mx-auto">
                 <div className="w-full">
                     <LabelInput text="Service Name" />

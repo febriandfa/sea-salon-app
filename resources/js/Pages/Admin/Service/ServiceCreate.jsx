@@ -6,6 +6,7 @@ import PrimaryButton from "@/Components/atoms/PrimaryButton";
 import Subtitle from "@/Components/atoms/Subtitle";
 import DashboardLayout from "@/Layouts/DashboardLayout";
 import { useForm } from "@inertiajs/react";
+import Swal from "sweetalert2";
 
 export default function ServiceCreate({ auth }) {
     const memberOnlyDatas = [
@@ -34,6 +35,12 @@ export default function ServiceCreate({ auth }) {
                     member_only: "",
                 });
             },
+        });
+        Swal.fire({
+            icon: "success",
+            title: "Success!",
+            showConfirmButton: false,
+            timer: 1000,
         });
     };
 

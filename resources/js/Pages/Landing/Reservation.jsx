@@ -10,6 +10,7 @@ import LandingLayout from "@/Layouts/LandingLayout";
 import { router, useForm, usePage } from "@inertiajs/react";
 import PrimaryLink from "@/Components/atoms/PrimaryLink";
 import LabelInput from "@/Components/atoms/LabelInput";
+import Swal from "sweetalert2";
 
 export default function Reservation({ auth }) {
     const { contacts, service, branchServices } = usePage().props;
@@ -40,6 +41,12 @@ export default function Reservation({ auth }) {
                 ]);
                 setData({ name: "", phone_number: "", date: "", time: "" });
             },
+        });
+        Swal.fire({
+            icon: "success",
+            title: "Success!",
+            showConfirmButton: false,
+            timer: 1000,
         });
     };
 

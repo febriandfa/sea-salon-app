@@ -3,13 +3,7 @@ import Label from "../atoms/Label";
 import PrimaryLink from "../atoms/PrimaryLink";
 import DeleteButton from "../atoms/DeleteButton";
 
-export default function BranchListCard({
-    id,
-    name,
-    location,
-    openHour,
-    closeHour,
-}) {
+export default function ContactListCard({ id, name, phone }) {
     return (
         <div className="flex items-center gap-3">
             <div className="bg-white p-2 shadow-lg border border-gold-700 rounded-lg w-full mx-auto">
@@ -17,26 +11,15 @@ export default function BranchListCard({
                     <Label text="Name" /> {name}
                 </p>
                 <p>
-                    <Label text="Open Hour" /> {formatTime(openHour)}
-                </p>
-                <p>
-                    <Label text="Close Hour" />
-                    {formatTime(closeHour)}
-                </p>
-                <p>
-                    <Label text="location" /> {location}
+                    <Label text="phone" /> {phone}
                 </p>
             </div>
             <div className="bg-white p-2 shadow-lg border border-gold-700 rounded-lg w-fit mx-auto flex flex-col justify-evenly gap-3">
                 <PrimaryLink
-                    link={route("branch-admin.show", id)}
-                    text="Show"
-                />
-                <PrimaryLink
-                    link={route("branch-admin.edit", id)}
+                    link={route("contact-admin.edit", id)}
                     text="Edit"
                 />
-                <DeleteButton link={route("branch-admin.destroy", id)} />
+                <DeleteButton link={route("contact-admin.destroy", id)} />
             </div>
         </div>
     );

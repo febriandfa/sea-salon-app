@@ -16,7 +16,7 @@ class ServiceCustomerController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::with(['users'])->get();
+        $contacts = Contact::all();
         $services = Service::all();
 
         return Inertia::render('Landing/Service', compact('contacts', 'services'));
@@ -43,7 +43,7 @@ class ServiceCustomerController extends Controller
      */
     public function show(string $id)
     {
-        $contacts = Contact::with(['users'])->get();
+        $contacts = Contact::all();
         $service = Service::where('id', $id)->first();
         $branchServices = BranchService::where('service_id', $id)->with(['branches', 'services'])->get();
 

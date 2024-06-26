@@ -24,7 +24,7 @@ class ContactAdminController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Admin/Contact/ContactCreate');
     }
 
     /**
@@ -32,7 +32,12 @@ class ContactAdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Contact::create([
+            'name' => $request->name,
+            'phone_number' => $request->phone_number
+        ]);
+
+        return back();
     }
 
     /**
@@ -48,7 +53,9 @@ class ContactAdminController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $contact = Contact::where('id', $id)->first();
+
+        return Inertia::render('Admin/Contact/ContactEdit', compact('contact'));
     }
 
     /**
@@ -56,7 +63,11 @@ class ContactAdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $contact = Contact::where('id', $id);
+        $contactUpdate = $request->only(['name', 'phone_number']);
+        $contact->update($contactUpdate);
+
+        return back();
     }
 
     /**
@@ -64,6 +75,8 @@ class ContactAdminController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Contact::where('id', $id)->delete();
+
+        return back();
     }
 }

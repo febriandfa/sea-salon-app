@@ -2,6 +2,7 @@ import { formatDate } from "@/Utils/formatDate";
 import Separator from "../atoms/Separator";
 import StarRating from "../atoms/StarRating";
 import PrimaryLink from "../atoms/PrimaryLink";
+import DeleteButton from "../atoms/DeleteButton";
 
 export default function ReviewListCard({ id, name, date, rating, comment }) {
     return (
@@ -20,12 +21,7 @@ export default function ReviewListCard({ id, name, date, rating, comment }) {
                 <StarRating rating={rating} />
             </div>
             <div className="bg-white p-2 shadow-lg border border-gold-700 rounded-lg w-fit mx-auto flex flex-col justify-evenly gap-3">
-                <PrimaryLink
-                    method="DELETE"
-                    as="button"
-                    link={route("review-admin.destroy", id)}
-                    text="Delete"
-                />
+                <DeleteButton link={route("review-admin.destroy", id)} />
             </div>
         </div>
     );
