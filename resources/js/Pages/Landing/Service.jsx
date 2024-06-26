@@ -13,7 +13,7 @@ export default function Service({ auth }) {
                 <div className="w-full h-80 bg-cover bg-[url('/assets/background-2.jpg')] bg-center absolute left-0">
                     <div className="w-full h-80 bg-gold-700 absolute bg-opacity-60 flex flex-col justify-center">
                         <Title title="Our Services~" />
-                        <p className="w-3/5 text-center italic text-white text-2xl mx-auto">
+                        <p className="lg:w-3/5 w-11/12 text-center italic text-white lg:text-2xl text-lg mx-auto">
                             "At SEA Salon, we believe that beauty and self-care
                             are essential parts of a balanced life. Our mission
                             is to provide you with exceptional service and a
@@ -24,7 +24,7 @@ export default function Service({ auth }) {
                 </div>
             </article>
             <article className="h-full mt-12">
-                <div className="grid grid-cols-3 w-4/5 mx-auto gap-8">
+                <div className="grid lg:grid-cols-3 grid-cols-1 w-4/5 mx-auto gap-8">
                     {services.map((service) => (
                         <ServiceCard
                             key={service.id}
@@ -39,18 +39,18 @@ export default function Service({ auth }) {
                 </div>
             </article>
             <article className="min-h-screen mt-12 flex flex-col items-center justify-center space-y-6">
-                <div className="border border-gold-700 p-6 w-3/5">
+                <div className="border border-gold-700 p-6 lg:w-3/5 w-11/12">
                     <div className="border border-gold-700 p-6">
                         <Subtitle>
                             Become a Member
                             <br />
                             For Our Special Services~
                         </Subtitle>
-                        <div className="w-fit mx-auto my-16">
+                        <div className="w-fit mx-auto lg:my-16 my-10">
                             <Link
                                 as="button"
                                 href={route("register")}
-                                className="text-3xl bg-gold-700 py-1.5 px-9 rounded-full text-white hover:scale-110 block shadow-lg"
+                                className="lg:text-3xl text-2xl bg-gold-700 py-1.5 px-9 rounded-full text-white hover:scale-110 block shadow-lg"
                             >
                                 Join Now!
                             </Link>

@@ -11,7 +11,7 @@ export default function Product({ auth }) {
                 <div className="w-full h-80 bg-cover bg-[url('/assets/background-3.jpg')] bg-center absolute left-0">
                     <div className="w-full h-80 bg-gold-700 absolute bg-opacity-60 flex flex-col justify-center">
                         <Title title="Our Products~" />
-                        <p className="w-3/5 text-center italic text-white text-2xl mx-auto">
+                        <p className="lg:w-3/5 w-11/12 text-center italic text-white lg:text-2xl text-lg mx-auto">
                             "At SEA Salon, we believe that beauty and self-care
                             are essential parts of a balanced life. Our mission
                             is to provide you with exceptional service and a

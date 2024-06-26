@@ -12,7 +12,7 @@ export default function ServiceIndex({ auth }) {
         <DashboardLayout userLogin={auth.user}>
             <Subtitle>Our Special Services</Subtitle>
             <div className="my-6">
-                <div className="grid grid-cols-3 w-11/12 mx-auto gap-8">
+                <div className="grid lg:grid-cols-3 grid-cols-1 w-11/12 mx-auto gap-8">
                     {services.map((service) => (
                         <SpecialServiceCard
                             key={service.id}

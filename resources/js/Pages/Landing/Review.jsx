@@ -29,13 +29,13 @@ export default function Review({ auth }) {
             data,
             onSuccess: () => {
                 setData({ name: "", rating: "", comment: "" });
+                Swal.fire({
+                    icon: "success",
+                    title: "Success!",
+                    showConfirmButton: false,
+                    timer: 1000,
+                });
             },
-        });
-        Swal.fire({
-            icon: "success",
-            title: "Success!",
-            showConfirmButton: false,
-            timer: 1000,
         });
     };
 
@@ -53,7 +53,7 @@ export default function Review({ auth }) {
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="w-12"
+                            className="lg:w-12 w-8"
                             viewBox="0 0 24 24"
                         >
                             <path
@@ -66,7 +66,7 @@ export default function Review({ auth }) {
                             />
                         </svg>
                     </Link>
-                    <div className="grid grid-cols-3 gap-6 mx-auto">
+                    <div className="grid lg:grid-cols-3 grid-cols-1 gap-6 mx-auto">
                         {reviews.data.map((review) => (
                             <ReviewCard
                                 key={review.id}
@@ -84,7 +84,7 @@ export default function Review({ auth }) {
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="w-12"
+                            className="lg:w-12 w-8"
                             viewBox="0 0 24 24"
                         >
                             <path
@@ -103,7 +103,7 @@ export default function Review({ auth }) {
                     <br />
                     For Us~
                 </Subtitle>
-                <div className="mt-12 w-3/5">
+                <div className="mt-12 lg:w-3/5 w-11/12">
                     <form onSubmit={onSubmit} className="space-y-4">
                         <div className="w-full">
                             <LabelInput text="Tell Us Your Name" />

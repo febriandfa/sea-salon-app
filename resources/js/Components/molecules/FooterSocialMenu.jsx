@@ -6,7 +6,7 @@ export default function FooterSocialMenu() {
             icon: (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-8"
+                    className="lg:w-8 w-6"
                     viewBox="0 0 24 24"
                 >
                     <g
@@ -27,7 +27,7 @@ export default function FooterSocialMenu() {
             icon: (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-8"
+                    className="lg:w-8 w-6"
                     viewBox="0 0 24 24"
                 >
                     <path
@@ -46,7 +46,7 @@ export default function FooterSocialMenu() {
             icon: (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-9"
+                    className="lg:w-9 w-7"
                     viewBox="0 0 24 24"
                 >
                     <path
@@ -60,7 +60,7 @@ export default function FooterSocialMenu() {
             icon: (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-9"
+                    className="lg:w-9 w-7"
                     viewBox="0 0 24 24"
                 >
                     <path

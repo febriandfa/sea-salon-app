@@ -34,13 +34,13 @@ export default function BranchCreate({ auth }) {
                     close_time: "",
                     availableServices: [],
                 });
+                Swal.fire({
+                    icon: "success",
+                    title: "Success!",
+                    showConfirmButton: false,
+                    timer: 1000,
+                });
             },
-        });
-        Swal.fire({
-            icon: "success",
-            title: "Success!",
-            showConfirmButton: false,
-            timer: 1000,
         });
     };
 
@@ -59,7 +59,10 @@ export default function BranchCreate({ auth }) {
     return (
         <DashboardLayout userLogin={auth.user}>
             <Subtitle>Add Branch</Subtitle>
-            <form onSubmit={onSubmit} className="my-6 space-y-3 w-4/5 mx-auto">
+            <form
+                onSubmit={onSubmit}
+                className="my-6 space-y-3 lg:w-4/5 w-11/12 mx-auto"
+            >
                 <div className="w-full">
                     <LabelInput text="Branch Name" />
                     <InputText
@@ -104,7 +107,7 @@ export default function BranchCreate({ auth }) {
                 </div>
                 <div className="w-full">
                     <LabelInput text="Branch Services" />
-                    <div className="grid grid-cols-3 gap-4 border-2 border-gray-400 rounded-xl p-3">
+                    <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 border-2 border-gray-400 rounded-xl p-3">
                         {services.map((service) => {
                             return (
                                 <div

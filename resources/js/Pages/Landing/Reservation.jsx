@@ -40,13 +40,13 @@ export default function Reservation({ auth }) {
                     data.time,
                 ]);
                 setData({ name: "", phone_number: "", date: "", time: "" });
+                Swal.fire({
+                    icon: "success",
+                    title: "Success!",
+                    showConfirmButton: false,
+                    timer: 1000,
+                });
             },
-        });
-        Swal.fire({
-            icon: "success",
-            title: "Success!",
-            showConfirmButton: false,
-            timer: 1000,
         });
     };
 
@@ -67,7 +67,7 @@ export default function Reservation({ auth }) {
                 <div className="w-full h-80 bg-cover bg-[url('/assets/background-4.jpg')] bg-top absolute left-0">
                     <div className="w-full h-80 bg-gold-700 absolute bg-opacity-60 flex flex-col justify-center">
                         <Title title={service.name} />
-                        <p className="w-3/5 text-center italic text-white text-2xl mx-auto">
+                        <p className="lg:w-3/5 w-11/12 text-center italic text-white lg:text-2xl text-lg mx-auto">
                             {service.description}
                         </p>
                     </div>

@@ -26,7 +26,7 @@ export default function ServiceShow({ auth }) {
     return (
         <DashboardLayout userLogin={auth.user}>
             <Subtitle>Service Detail</Subtitle>
-            <div className="my-6 space-y-3 w-4/5 mx-auto">
+            <div className="my-6 space-y-3 lg:w-4/5 w-11/12 mx-auto">
                 <div className="w-full">
                     <LabelInput text="Service Name" />
                     <InputText

@@ -39,13 +39,13 @@ export default function ServiceShow({ auth }) {
                     data.time,
                 ]);
                 setData({ date: "", time: "" });
+                Swal.fire({
+                    icon: "success",
+                    title: "Success!",
+                    showConfirmButton: false,
+                    timer: 1000,
+                });
             },
-        });
-        Swal.fire({
-            icon: "success",
-            title: "Success!",
-            showConfirmButton: false,
-            timer: 1000,
         });
     };
 
@@ -61,7 +61,7 @@ export default function ServiceShow({ auth }) {
                 {service.name}
             </Subtitle>
             <div className="my-6">
-                <div className="my-16 w-4/5 mx-auto space-y-6">
+                <div className="my-16 lg:w-4/5 mx-auto space-y-6">
                     {branchServices.map((branchService) => (
                         <BranchCard
                             key={branchService.id}

@@ -18,11 +18,11 @@ export default function BranchCard({
             key={key}
             className="bg-white p-4 shadow-lg border border-gold-700 rounded-lg"
         >
-            <div className="flex items-center justify-between">
+            <div className="flex lg:flex-row flex-col lg:space-y-0 space-y-6 items-center justify-between">
                 <div className="space-y-4">
                     <div>
                         <p className="font-playfair italic text-3xl">{name}</p>
-                        <p className="w-[30rem]">{location}</p>
+                        <p className="lg:w-[30rem]">{location}</p>
                     </div>
                     <div className="flex items-center gap-1">
                         <svg
@@ -51,7 +51,9 @@ export default function BranchCard({
                     onClick={handleOnClick}
                 />
             </div>
-            {isOpen && <div className="mt-4 w-96 mx-auto">{children}</div>}
+            {isOpen && (
+                <div className="mt-4 lg:w-96 w-full mx-auto">{children}</div>
+            )}
         </div>
     );
 }

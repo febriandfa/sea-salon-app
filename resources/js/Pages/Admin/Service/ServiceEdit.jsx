@@ -27,12 +27,16 @@ export default function ServiceEdit({ auth }) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        post(route("service-admin.update", service.id));
-        Swal.fire({
-            icon: "success",
-            title: "Success!",
-            showConfirmButton: false,
-            timer: 1000,
+        post(route("service-admin.update", service.id), {
+            data,
+            onSuccess: () => {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success!",
+                    showConfirmButton: false,
+                    timer: 1000,
+                });
+            },
         });
     };
 
@@ -45,7 +49,10 @@ export default function ServiceEdit({ auth }) {
     return (
         <DashboardLayout userLogin={auth.user}>
             <Subtitle>Edit Service</Subtitle>
-            <form onSubmit={onSubmit} className="my-6 space-y-3 w-4/5 mx-auto">
+            <form
+                onSubmit={onSubmit}
+                className="my-6 space-y-3 lg:w-4/5 w-11/12 mx-auto"
+            >
                 <div className="w-full">
                     <LabelInput text="Service Name" />
                     <InputText

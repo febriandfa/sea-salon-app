@@ -16,19 +16,23 @@ export default function Register() {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        post(route("register"));
-        Swal.fire({
-            icon: "success",
-            title: "Register Success!",
-            showConfirmButton: false,
-            timer: 1000,
+        post(route("register"), {
+            data,
+            onSuccess: () => {
+                Swal.fire({
+                    icon: "success",
+                    title: "Register Success!",
+                    showConfirmButton: false,
+                    timer: 1000,
+                });
+            },
         });
     };
 
     return (
         <main className="bg-[url('/assets/background.jpg')] w-screen h-screen bg-no-repeat bg-cover">
             <section className="w-screen h-screen bg-gray-500 absolute bg-opacity-70 flex items-center justify-center">
-                <div className="bg-white rounded-xl w-2/5 p-6 space-y-6">
+                <div className="bg-white rounded-xl lg:w-2/5 w-11/12 p-6 space-y-6">
                     <Link
                         as="button"
                         href={route("home")}

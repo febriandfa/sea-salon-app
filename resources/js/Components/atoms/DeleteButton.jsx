@@ -1,7 +1,7 @@
 import { Link, router } from "@inertiajs/react";
 import Swal from "sweetalert2";
 
-export default function DeleteButton({ link }) {
+export default function DeleteButton({ link, children }) {
     const handleOnClick = () => {
         Swal.fire({
             title: "Delete?",
@@ -27,7 +27,7 @@ export default function DeleteButton({ link }) {
             onClick={handleOnClick}
             className="hover:bg-red-700 bg-white py-1 px-4 rounded-full hover:text-white text-red-700 font-semibold border-2 border-red-700"
         >
-            Delete
+            {children ? children : "Delete"}
         </button>
     );
 }

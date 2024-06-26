@@ -24,7 +24,7 @@ export default function BranchEdit({ auth }) {
     return (
         <DashboardLayout userLogin={auth.user}>
             <Subtitle>Branch Detail</Subtitle>
-            <div className="my-6 space-y-3 w-4/5 mx-auto">
+            <div className="my-6 space-y-3 lg:w-4/5 w-11/12 mx-auto">
                 <div className="w-full">
                     <LabelInput text="Branch Name" />
                     <InputText
@@ -65,7 +65,7 @@ export default function BranchEdit({ auth }) {
                 </div>
                 <div className="w-full">
                     <LabelInput text="Branch Services" />
-                    <div className="grid grid-cols-3 gap-4 border-2 border-gray-400 rounded-xl p-3">
+                    <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 border-2 border-gray-400 rounded-xl p-3">
                         {services.map((service) => {
                             return (
                                 <div

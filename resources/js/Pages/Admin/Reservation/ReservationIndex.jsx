@@ -10,7 +10,7 @@ export default function ReservationIndex({ auth }) {
     return (
         <DashboardLayout userLogin={auth.user}>
             <Subtitle>Reservations</Subtitle>
-            <div className="my-6 space-y-3 w-11/12 mx-auto">
+            <div className="my-6 space-y-3 lg:w-11/12 w-full mx-auto">
                 {reservations.map((reservation) => {
                     return (
                         <ReservationListCard

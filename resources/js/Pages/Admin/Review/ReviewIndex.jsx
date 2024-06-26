@@ -10,7 +10,7 @@ export default function ReviewIndex({ auth }) {
     return (
         <DashboardLayout userLogin={auth.user}>
             <Subtitle>Reviews</Subtitle>
-            <div className="my-6 space-y-3 w-4/5 mx-auto">
+            <div className="my-6 space-y-3 lg:w-4/5 w-full mx-auto">
                 {reviews.map((review) => {
                     return (
                         <ReviewListCard
