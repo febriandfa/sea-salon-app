@@ -6,6 +6,8 @@ import { Link, usePage } from "@inertiajs/react";
 export default function Product({ auth }) {
     const { contacts, products } = usePage().props;
 
+    console.log(products);
+
     return (
         <LandingLayout userLogin={auth.user} contactDatas={contacts}>
             <article className="h-80 overflow-hidden">
@@ -13,21 +15,24 @@ export default function Product({ auth }) {
                     <div className="w-full h-80 bg-gold-700 absolute bg-opacity-60 flex flex-col justify-center">
                         <Title title="Our Products~" />
                         <p className="lg:w-3/5 w-11/12 text-center italic text-white lg:text-2xl text-lg mx-auto">
-                            "At SEA Salon, we believe that beauty and self-care
-                            are essential parts of a balanced life. Our mission
-                            is to provide you with exceptional service and a
-                            rejuvenating experience that leaves you looking and
-                            feeling your best"
+                            "At SEA Salon, we believe that quality and safety
+                            are paramount. Our products are meticulously crafted
+                            and lab-tested to ensure they meet the highest
+                            standards. Each item is designed to enhance your
+                            beauty and self-care routine, providing you with the
+                            confidence and satisfaction you deserve"
                         </p>
                     </div>
                 </div>
             </article>
-            <article className="min-h-screen">
+            <article className="min-h-screen flex flex-col justify-center">
                 <div className="flex items-center justify-between gap-8 mt-12">
                     <Link
                         as="button"
                         href={products.prev_page_url}
-                        className="text-gold-700 hover:scale-110"
+                        className={`text-gold-700 hover:scale-110 ${
+                            products.total <= 6 ? "hidden" : "block"
+                        }`}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +62,9 @@ export default function Product({ auth }) {
                     <Link
                         as="button"
                         href={products.next_page_url}
-                        className="text-gold-700 hover:scale-110"
+                        className={`text-gold-700 hover:scale-110 ${
+                            products.total <= 6 ? "hidden" : "block"
+                        }`}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -73,6 +80,10 @@ export default function Product({ auth }) {
                         </svg>
                     </Link>
                 </div>
+                <p className="italic font-playfair lg:text-6xl text-3xl text-center lg:w-3/5 w-11/12 mx-auto capitalize mt-12">
+                    Our product is guaranteed safe because it has been
+                    lab-tested
+                </p>
             </article>
         </LandingLayout>
     );

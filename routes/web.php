@@ -15,6 +15,8 @@ use App\Http\Controllers\Customer\ServiceCustomerController;
 use App\Http\Controllers\Customer\SpecialServiceCustomerController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Contact;
+use App\Models\Product;
+use App\Models\Service;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,19 +32,12 @@ use Inertia\Inertia;
 |
 */
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
-
 Route::get('/', function () {
     $contacts = Contact::all();
+    $latestProducts = Product::latest('created_at')->take(3)->get();
+    $popularServices = Service::withCount(['reservations'])->take(3)->get();
 
-    return Inertia::render('Landing/Home', compact('contacts'));
+    return Inertia::render('Landing/Home', compact('contacts', 'latestProducts', 'popularServices'));
 })->name('home');
 
 Route::resources([
@@ -70,21 +65,10 @@ Route::group(['middleware' => 'role:admin'], function () {
 Route::group(['middleware' => ['auth', 'role:customer']], function () {
     Route::prefix('customer')->group(function () {
         Route::resources([
-            'dashboard-customer' => DashboardCustomerController::class,
             'reservation-customer' => ReservationCustomerController::class,
             'service-customer' => SpecialServiceCustomerController::class
         ]);
     });
 });
-
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
 
 require __DIR__.'/auth.php';

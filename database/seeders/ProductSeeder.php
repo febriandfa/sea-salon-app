@@ -25,7 +25,13 @@ class ProductSeeder extends Seeder
                 'price' => '40000',
                 'description' => fake()->paragraph,
                 'img' => 'sea-conditioner.jpg'
-            ]
+            ],
+            [
+                'name' => 'Face Wash',
+                'price' => '100000',
+                'description' => fake()->paragraph,
+                'img' => 'sea-facewash.jpg'
+            ],
         ];
 
         foreach ($products as $product) {

@@ -18,4 +18,8 @@ class Service extends Model
         'description',
         'member_only'
     ];
+
+    public function reservations() {
+        return $this->hasMany(Reservation::class, 'service_id', 'id');
+    }
 }

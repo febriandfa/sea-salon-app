@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Branch;
+use App\Models\Product;
+use App\Models\Reservation;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,7 +17,12 @@ class DashboardAdminController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Admin/Dashboard');
+        $products = Product::all();
+        $services = Service::all();
+        $branches = Branch::all();
+        $reservations = Reservation::all();
+
+        return Inertia::render('Admin/Dashboard', compact('products', 'services', 'branches', 'reservations'));
     }
 
     /**

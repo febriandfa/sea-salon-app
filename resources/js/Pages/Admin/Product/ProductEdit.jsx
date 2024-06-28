@@ -14,6 +14,7 @@ export default function ProductEdit({ auth }) {
     const { product } = usePage().props;
 
     const { data, setData, post, errors } = useForm({
+        _method: "PATCH",
         name: product.name,
         price: product.price,
         description: product.description,

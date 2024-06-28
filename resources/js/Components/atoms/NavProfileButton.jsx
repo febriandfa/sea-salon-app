@@ -67,7 +67,7 @@ export default function NavProfileButton({ isDashboard = false, userLogin }) {
                             <NavLink
                                 link={
                                     userLogin.role === "customer"
-                                        ? route("dashboard-customer.index")
+                                        ? route("reservation-customer.index")
                                         : route("dashboard-admin.index")
                                 }
                                 menu="Dashboard"

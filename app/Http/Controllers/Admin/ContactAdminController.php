@@ -37,7 +37,7 @@ class ContactAdminController extends Controller
             'phone_number' => $request->phone_number
         ]);
 
-        return back();
+        return to_route('contact-admin.index');
     }
 
     /**

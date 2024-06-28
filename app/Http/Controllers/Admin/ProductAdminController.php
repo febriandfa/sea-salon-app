@@ -78,8 +78,6 @@ class ProductAdminController extends Controller
         $product = Product::where('id', $id);
 
         if ($request->hasFile('img')) {
-            Storage::delete("public/product/" . $product->img);
-
             $file = $request->file('img');
             $extension = $file->getClientOriginalName();
             $fileName = date('YmdHis') . "." . $extension;

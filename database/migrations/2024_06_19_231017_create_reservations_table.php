@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained();
             $table->string('name');
             $table->string('phone_number');
-            $table->foreignId('service_id')->constrained();
-            $table->foreignId('branch_id')->constrained();
+            $table->foreignId('service_id')->constrained()->onDelete('cascade');
+            $table->foreignId('branch_id')->constrained()->onDelete('cascade');
             $table->date('date');
             $table->time('time');
             $table->timestamps();

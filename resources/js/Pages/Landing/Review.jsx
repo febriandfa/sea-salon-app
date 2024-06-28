@@ -49,7 +49,9 @@ export default function Review({ auth }) {
                     <Link
                         as="button"
                         href={reviews.prev_page_url}
-                        className="text-gold-700 hover:scale-110"
+                        className={`text-gold-700 hover:scale-110 ${
+                            reviews.total <= 6 ? "hidden" : "block"
+                        }`}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +82,9 @@ export default function Review({ auth }) {
                     <Link
                         as="button"
                         href={reviews.next_page_url}
-                        className="text-gold-700 hover:scale-110"
+                        className={`text-gold-700 hover:scale-110 ${
+                            reviews.total <= 6 ? "hidden" : "block"
+                        }`}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
