@@ -96,9 +96,9 @@ export default function DashboardLayout({ children, userLogin }) {
                     />
                 </svg>
             ),
-            link: "",
+            link: route("product-admin.index"),
             menu: "Product",
-            active: "",
+            active: url.startsWith("/admin/product-admin"),
         },
         {
             icon: (

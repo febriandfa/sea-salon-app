@@ -22,7 +22,7 @@ export default function NavBar({ userLogin }) {
             active: url.startsWith("/service"),
         },
         {
-            link: route("product"),
+            link: route("product.index"),
             menu: "Our Product",
             active: url.startsWith("/product"),
         },

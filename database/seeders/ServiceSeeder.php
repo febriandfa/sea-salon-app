@@ -26,7 +26,7 @@ class ServiceSeeder extends Seeder
                 'duration' => '60',
                 'price' => '70000',
                 'description' => fake()->paragraph,
-                'member_only' => 'Y'
+                'member_only' => 'N'
             ],
             [
                 'name' => 'Facial Treatments',
@@ -34,6 +34,13 @@ class ServiceSeeder extends Seeder
                 'price' => '85000',
                 'description' => fake()->paragraph,
                 'member_only' => 'N'
+            ],
+            [
+                'name' => 'Nail Art',
+                'duration' => '70',
+                'price' => '150000',
+                'description' => fake()->paragraph,
+                'member_only' => 'Y'
             ]
         ];
 

@@ -3,19 +3,18 @@
 use App\Http\Controllers\Admin\BranchAdminController;
 use App\Http\Controllers\Admin\ContactAdminController;
 use App\Http\Controllers\Admin\DashboardAdminController;
+use App\Http\Controllers\Admin\ProductAdminController;
 use App\Http\Controllers\Admin\ReservationAdminController;
 use App\Http\Controllers\Admin\ReviewAdminController;
 use App\Http\Controllers\Admin\ServiceAdminController;
 use App\Http\Controllers\Customer\DashboardCustomerController;
+use App\Http\Controllers\Customer\ProductCustomerController;
 use App\Http\Controllers\Customer\ReservationCustomerController;
 use App\Http\Controllers\Customer\ReviewCustomerController;
 use App\Http\Controllers\Customer\ServiceCustomerController;
 use App\Http\Controllers\Customer\SpecialServiceCustomerController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Contact;
-use App\Models\Product;
-use App\Models\Review;
-use App\Models\Service;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -46,15 +45,9 @@ Route::get('/', function () {
     return Inertia::render('Landing/Home', compact('contacts'));
 })->name('home');
 
-Route::get('/product', function () {
-    $contacts = Contact::all();
-    $products = Product::all();
-
-    return Inertia::render('Landing/Product', compact('contacts', 'products'));
-})->name('product');
-
 Route::resources([
     'service' => ServiceCustomerController::class,
+    'product' => ProductCustomerController::class,
     'review' => ReviewCustomerController::class,
     'reservation' => ReservationCustomerController::class
 ]);
@@ -69,6 +62,7 @@ Route::group(['middleware' => 'role:admin'], function () {
             'review-admin' => ReviewAdminController::class,
             'reservation-admin' => ReservationAdminController::class,
             'contact-admin' => ContactAdminController::class,
+            'product-admin' => ProductAdminController::class
         ]);
     });
 });

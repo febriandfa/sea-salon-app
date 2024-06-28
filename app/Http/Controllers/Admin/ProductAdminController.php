@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class ProductAdminController extends Controller
 {
@@ -12,7 +15,9 @@ class ProductAdminController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+
+        return Inertia::render('Admin/Product/ProductIndex', compact('products'));
     }
 
     /**
@@ -20,7 +25,7 @@ class ProductAdminController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Admin/Product/ProductCreate');
     }
 
     /**
@@ -28,7 +33,21 @@ class ProductAdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $extension = $file->getClientOriginalName();
+            $fileName = date('YmdHis') . "." . $extension;
+            $file->move(storage_path('app/public/product'), $fileName);
+        }
+
+        Product::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'description' => $request->description,
+            'img' => $fileName
+        ]);
+
+        return back();
     }
 
     /**
@@ -36,7 +55,9 @@ class ProductAdminController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::where('id', $id)->first();
+
+        return Inertia::render('Admin/Product/ProductShow', compact('product'));
     }
 
     /**
@@ -44,7 +65,9 @@ class ProductAdminController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::where('id', $id)->first();
+
+        return Inertia::render('Admin/Product/ProductEdit', compact('product'));
     }
 
     /**
@@ -52,7 +75,24 @@ class ProductAdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $product = Product::where('id', $id);
+
+        if ($request->hasFile('img')) {
+            Storage::delete("public/product/" . $product->img);
+
+            $file = $request->file('img');
+            $extension = $file->getClientOriginalName();
+            $fileName = date('YmdHis') . "." . $extension;
+            $file->move(storage_path('app/public/product'), $fileName);
+        } else {
+            $fileName = $product->file;
+        }
+
+        $productUpdate = $request->only(['name', 'price', 'description', 'img']);
+        $productUpdate['img'] = $fileName;
+        $product->update($productUpdate);
+
+        return back();
     }
 
     /**
@@ -60,6 +100,6 @@ class ProductAdminController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Product::where('id', $id)->delete();
     }
 }

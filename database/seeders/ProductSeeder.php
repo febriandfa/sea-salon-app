@@ -17,12 +17,14 @@ class ProductSeeder extends Seeder
             [
                 'name' => 'Shampoo',
                 'price' => '30000',
-                'description' => fake()->paragraph
+                'description' => fake()->paragraph,
+                'img' => 'sea-shampoo.jpg'
             ],
             [
                 'name' => 'Conditioner',
                 'price' => '40000',
-                'description' => fake()->paragraph
+                'description' => fake()->paragraph,
+                'img' => 'sea-conditioner.jpg'
             ]
         ];
 
@@ -31,6 +33,7 @@ class ProductSeeder extends Seeder
                 'name' => $product['name'],
                 'price' => $product['price'],
                 'description' => $product['description'],
+                'img' => $product['img']
             ]);
         }
     }
