@@ -40,7 +40,7 @@ yarn install
 
 ### 4. Environment Configuration
 
-Copy the `.env.example` file to `.env` and adjust the configuration according to your needs, especially the database settings:
+Copy the `.env.example` file to `.env` and adjust the configuration inside `.env` according to your needs, especially the database settings:
 
 ```bash
 cp .env.example .env
