@@ -1,3 +1,106 @@
+## System Requirements
+
+Before starting, make sure you have the following software installed on your system:
+
+-   PHP >= 7.4
+-   Composer
+-   Node.js >= 12.x
+-   NPM or Yarn
+-   Database (MySQL, PostgreSQL, etc.)
+-   XAMPP or Laragon
+
+## Installation Steps
+
+### 1. Clone the Repository
+
+Clone this repository to your local directory:
+
+```bash
+git clone https://github.com/febriandfa/sea-salon-app.git
+cd <repository-directory-name>
+```
+
+### 2. Install Backend Dependencies
+
+Install all PHP dependencies using Composer:
+
+```bash
+composer install
+```
+
+### 3. Install Frontend Dependencies
+
+Install all Node.js dependencies using NPM or Yarn:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### 4. Environment Configuration
+
+Copy the `.env.example` file to `.env` and adjust the configuration according to your needs, especially the database settings:
+
+```bash
+cp .env.example .env
+```
+
+### 5. Generate Application Key
+
+Generate the Laravel application key:
+
+```bash
+php artisan key:generate
+```
+
+### 6. Link Storage to Public
+
+Link storage to public:
+
+```bash
+php artisan storage:link
+```
+
+### 7. Migrate and Seed Database
+
+Migrate and seed the database:
+
+```bash
+php artisan migrate --seed
+```
+
+### 8. Build the Application
+
+Build the frontend application:
+
+```bash
+npm run dev
+# or for production build
+npm run prod
+```
+
+### 9. Run the Development Server
+
+Run the Laravel development server:
+
+```bash
+php artisan serve
+```
+
+Access the application in your browser at `http://localhost:8000`.
+
+## Directory Structure
+
+Here are some important directories in this project:
+
+```
+/app             # Backend logic for Laravel
+/resources/js    # Frontend code for React
+/routes/web.php  # Web routes definition for Laravel
+```
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
